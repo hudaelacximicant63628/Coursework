@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="90e450e5-9eaa-4902-993c-2ecdc781d021" name="Default" comment="TableView for notes not working yet&#10;All the classes have been initialised&#10;Notes stage has been completed">
+    <list default="true" id="90e450e5-9eaa-4902-993c-2ecdc781d021" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CourseworkHrithik/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../CourseworkHrithik/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../CourseworkHrithik/src/GUI.java" afterPath="$PROJECT_DIR$/../CourseworkHrithik/src/AssignmentsStage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CourseworkHrithik/src/NotesStage.java" afterPath="$PROJECT_DIR$/../CourseworkHrithik/src/NotesStage.java" />
     </list>
     <ignored path="$PROJECT_DIR$/../CourseworkHrithik/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,12 +30,12 @@
       <file leaf-file-name="NotesStage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../CourseworkHrithik/src/NotesStage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="366">
+              <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1635#1636#0" expanded="true" />
-                <element signature="e#1663#1664#0" expanded="true" />
+                <element signature="e#1965#1966#0" expanded="true" />
+                <element signature="e#1993#1994#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -295,7 +295,7 @@
       <workItem from="1507643162738" duration="282000" />
       <workItem from="1507643466294" duration="907000" />
       <workItem from="1507723742233" duration="5171000" />
-      <workItem from="1507887653173" duration="2925000" />
+      <workItem from="1507887653173" duration="3060000" />
     </task>
     <task id="LOCAL-00001" summary="kk">
       <created>1507283743282</created>
@@ -332,11 +332,18 @@
       <option name="project" value="LOCAL" />
       <updated>1507728851693</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="GUI COMPLETED.&#10;&#10;Assignments and Notes stage has been split into two individual classes.&#10;&#10;The functionality of the button and the database have not been initalised yet">
+      <created>1507890694285</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1507890694285</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10285000" />
+    <option name="totallyTimeSpent" value="10420000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
@@ -382,7 +389,8 @@
     <MESSAGE value="GUI in progress" />
     <MESSAGE value="In progress" />
     <MESSAGE value="TableView for notes not working yet&#10;All the classes have been initialised&#10;Notes stage has been completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="TableView for notes not working yet&#10;All the classes have been initialised&#10;Notes stage has been completed" />
+    <MESSAGE value="GUI COMPLETED.&#10;&#10;Assignments and Notes stage has been split into two individual classes.&#10;&#10;The functionality of the button and the database have not been initalised yet" />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI COMPLETED.&#10;&#10;Assignments and Notes stage has been split into two individual classes.&#10;&#10;The functionality of the button and the database have not been initalised yet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -460,12 +468,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../CourseworkHrithik/src/NotesStage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="366">
+          <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#1663#1664#0" expanded="true" />
+            <element signature="e#1965#1966#0" expanded="true" />
+            <element signature="e#1993#1994#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -30,11 +30,14 @@ public class NotesStage extends Application{
         note.setPrefWidth(800);
         notesStageHBox.getChildren().addAll(addNote, deleteNote, note);
 
+        ObservableList<String> notesData = FXCollections.observableArrayList();
+
 
         TableView notesTableView = new TableView<>();
 
         TableColumn<String, String> notesColumn = new TableColumn<>("Notes");
-
+        notesTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        notesColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
 
 
         notesTableView.getColumns().add(notesColumn);
@@ -44,13 +47,14 @@ public class NotesStage extends Application{
         note.setPromptText("Enter note");
         notesStageVBox.getChildren().addAll(notesTableView, notesStageHBox);
 
+        ObservableList selectedItems = notesTableView.getSelectionModel().getSelectedItems();
+
+        deleteNote.setOnAction(e -> notesData.remove(selectedItems.get(0)));
+
+        addNote.setOnAction(e -> notesData.add(note.getText()));
 
 
-        deleteNote.setOnAction(e -> System.out.println("The delete button has not been initialised yet"));
-
-        addNote.setOnAction(e -> System.out.println("The add button has not been initialised"));
-
-
+        notesTableView.setItems(notesData);
 
         stage.setScene(new Scene(notesStageVBox));
 
