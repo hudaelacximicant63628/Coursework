@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="90e450e5-9eaa-4902-993c-2ecdc781d021" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CourseworkHrithik/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../CourseworkHrithik/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CourseworkHrithik/src/AssignmentsStage.java" afterPath="$PROJECT_DIR$/../CourseworkHrithik/src/AssignmentsStage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CourseworkHrithik/src/NotesStage.java" afterPath="$PROJECT_DIR$/../CourseworkHrithik/src/NotesStage.java" />
     </list>
     <ignored path="$PROJECT_DIR$/../CourseworkHrithik/out/" />
@@ -18,8 +19,8 @@
       <file leaf-file-name="AssignmentsStage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../CourseworkHrithik/src/AssignmentsStage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+            <state relative-caret-position="381">
+              <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="119" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -30,12 +31,12 @@
       <file leaf-file-name="NotesStage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../CourseworkHrithik/src/NotesStage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+            <state relative-caret-position="213">
+              <caret line="62" column="8" lean-forward="true" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1965#1966#0" expanded="true" />
-                <element signature="e#1993#1994#0" expanded="true" />
+                <element signature="e#2579#2580#0" expanded="true" />
+                <element signature="e#2607#2608#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -295,7 +296,7 @@
       <workItem from="1507643162738" duration="282000" />
       <workItem from="1507643466294" duration="907000" />
       <workItem from="1507723742233" duration="5171000" />
-      <workItem from="1507887653173" duration="3060000" />
+      <workItem from="1507887653173" duration="3273000" />
     </task>
     <task id="LOCAL-00001" summary="kk">
       <created>1507283743282</created>
@@ -339,11 +340,18 @@
       <option name="project" value="LOCAL" />
       <updated>1507890694285</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="GUI COMPLETED and NOTES FUNCTIONALITY COMPLETED&#10;&#10;The functionality of the buttons for the assignment and the database have not been initalised yet">
+      <created>1507890794552</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1507890794552</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10420000" />
+    <option name="totallyTimeSpent" value="10633000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
@@ -390,7 +398,8 @@
     <MESSAGE value="In progress" />
     <MESSAGE value="TableView for notes not working yet&#10;All the classes have been initialised&#10;Notes stage has been completed" />
     <MESSAGE value="GUI COMPLETED.&#10;&#10;Assignments and Notes stage has been split into two individual classes.&#10;&#10;The functionality of the button and the database have not been initalised yet" />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI COMPLETED.&#10;&#10;Assignments and Notes stage has been split into two individual classes.&#10;&#10;The functionality of the button and the database have not been initalised yet" />
+    <MESSAGE value="GUI COMPLETED and NOTES FUNCTIONALITY COMPLETED&#10;&#10;The functionality of the buttons for the assignment and the database have not been initalised yet" />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI COMPLETED and NOTES FUNCTIONALITY COMPLETED&#10;&#10;The functionality of the buttons for the assignment and the database have not been initalised yet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -458,8 +467,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../CourseworkHrithik/src/AssignmentsStage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+        <state relative-caret-position="381">
+          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="119" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -468,12 +477,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../CourseworkHrithik/src/NotesStage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+        <state relative-caret-position="213">
+          <caret line="62" column="8" lean-forward="true" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1965#1966#0" expanded="true" />
-            <element signature="e#1993#1994#0" expanded="true" />
+            <element signature="e#2579#2580#0" expanded="true" />
+            <element signature="e#2607#2608#0" expanded="true" />
           </folding>
         </state>
       </provider>

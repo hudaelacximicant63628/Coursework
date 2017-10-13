@@ -18,7 +18,6 @@ import java.util.Optional;
         private Button modify;
         private Button userSceneButton;
         private Button AssignmentSceneButton;
-        private Button notesButton;
 
         private DatePicker deadline;
         private TextField teacherName;
@@ -32,8 +31,6 @@ import java.util.Optional;
         private TextField userName;
         private TextField lastName;
 
-        private static Pane notesStage;
-        private TextArea notesTextArea;
 
 
         public static void main(String[] args) {

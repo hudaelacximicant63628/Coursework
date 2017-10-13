@@ -8,6 +8,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+import java.util.Optional;
 
 public class NotesStage extends Application{
 
@@ -58,6 +61,23 @@ public class NotesStage extends Application{
 
         stage.setScene(new Scene(notesStageVBox));
 
+        closeConfirmation(stage);
+
+    }
+
+    private void closeConfirmation(Stage stage){
+        stage.setOnCloseRequest((WindowEvent we) ->
+        {
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+            a.setTitle("Confirmation");
+            a.setHeaderText("Do you really want to leave?");
+            Optional<ButtonType> closeResponse = a.showAndWait();
+            if (closeResponse.get() == ButtonType.OK){
+                System.exit(0);
+            }else{
+                we.consume();
+            }
+        });
     }
 
     public static void main(String[] args) {
