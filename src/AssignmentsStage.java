@@ -1,14 +1,19 @@
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import java.util.Date;
 import java.util.Optional;
 
 
@@ -30,8 +35,6 @@ import java.util.Optional;
         private DatePicker DOB;
         private TextField userName;
         private TextField lastName;
-
-
 
         public static void main(String[] args) {
             launch(args);
@@ -69,7 +72,6 @@ import java.util.Optional;
             format = new TextField();
             format.setPromptText("Enter format");
 
-
             HBox assignmentSceneHBox = new HBox();
             assignmentSceneHBox.getChildren().addAll(add, remove, modify, userSceneButton);
 
@@ -90,6 +92,10 @@ import java.util.Optional;
             Scene userScene = new Scene(userSceneVBOX, 300, 150);
             stage.setTitle("School planner");
 
+            Image icon = new Image(getClass().getResourceAsStream("school_planner_icon.png"));
+            stage.getIcons().add(icon);
+
+
             add.setOnAction(e -> System.out.println("Add feature has not been implemented"));
             remove.setOnAction(e -> System.out.println("Remove features has not been implemented"));
             modify.setOnAction(e -> System.out.println("Modifying feature has not been implemented"));
@@ -97,11 +103,37 @@ import java.util.Optional;
             AssignmentSceneButton.setOnAction(e -> stage.setScene(assignmentScene));
 
             tableView.setMinHeight(470);
+            //---------------------------------------------------------------------------------------------------------------------
+            //TABLE COLUMNS
+            ObservableList<Assignments> assignmentsData = FXCollections.observableArrayList();
+            //has equal spacing for each column
+            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+            tableView.setPrefSize(400, 300);
+            tableView.setItems(assignmentsData);
+
+            TableColumn classroomColumn = new TableColumn<>("Classroom");
+            classroomColumn.setCellValueFactory(new PropertyValueFactory<>("classroom"));
+            tableView.getColumns().add(classroomColumn);
+
+            TableColumn descriptionColumn = new TableColumn<>("Description");
+            descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+            tableView.getColumns().add(descriptionColumn);
+
+            TableColumn deadlineColumn = new TableColumn<>("Date");
+            deadlineColumn.setCellValueFactory(new PropertyValueFactory<>("deadline"));
+            tableView.getColumns().add(deadlineColumn);
+
+
+
+
+            //---------------------------------------------------------------------------------------------------------------------
 
             closeConfirmation(stage);
             stage.setScene(assignmentScene);
             stage.show();
+
+
         }
 
         private void closeConfirmation(Stage stage){

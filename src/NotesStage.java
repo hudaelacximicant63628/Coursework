@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -18,7 +19,10 @@ public class NotesStage extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("Notes");
-        stage.show();
+        Image icon = new Image(getClass().getResourceAsStream("school_planner_icon.png"));
+        stage.getIcons().add(icon);
+        stage.setMinHeight(580);
+        stage.setMinWidth(1000);
 
         VBox notesStageVBox = new VBox();
 
@@ -62,6 +66,7 @@ public class NotesStage extends Application{
         stage.setScene(new Scene(notesStageVBox));
 
         closeConfirmation(stage);
+        stage.show();
 
     }
 
