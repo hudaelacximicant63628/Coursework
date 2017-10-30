@@ -15,6 +15,9 @@ import java.util.Optional;
 
 public class NotesStage extends Application{
 
+    private ListView listView;
+    private Button user;
+    private Button notes;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -23,6 +26,17 @@ public class NotesStage extends Application{
         stage.getIcons().add(icon);
         stage.setMinHeight(580);
         stage.setMinWidth(1000);
+
+
+        notes = new Button("Notes");
+        listView = new ListView();
+        VBox userSceneVBox = new VBox();
+        userSceneVBox.getChildren().addAll(listView, notes);
+        user = new Button("User");
+
+
+
+        Scene userScene = new Scene(userSceneVBox, 300, 150);
 
         VBox notesStageVBox = new VBox();
 
@@ -35,7 +49,7 @@ public class NotesStage extends Application{
 
         TextField note = new TextField();
         note.setPrefWidth(800);
-        notesStageHBox.getChildren().addAll(addNote, deleteNote, note);
+        notesStageHBox.getChildren().addAll(addNote, deleteNote,user,  note);
 
         ObservableList<String> notesData = FXCollections.observableArrayList();
 
@@ -55,20 +69,26 @@ public class NotesStage extends Application{
         notesStageVBox.getChildren().addAll(notesTableView, notesStageHBox);
 
         ObservableList selectedItems = notesTableView.getSelectionModel().getSelectedItems();
+        Scene assignmentScene = new Scene(notesStageVBox);
 
         deleteNote.setOnAction(e -> notesData.remove(selectedItems.get(0)));
 
         addNote.setOnAction(e -> notesData.add(note.getText()));
+        notes.setOnAction(e -> stage.setScene(assignmentScene));
+        user.setOnAction(e -> stage.setScene(userScene));
+
 
 
         notesTableView.setItems(notesData);
 
-        stage.setScene(new Scene(notesStageVBox));
+        stage.setScene(assignmentScene);
+
 
         closeConfirmation(stage);
         stage.show();
 
     }
+
 
     private void closeConfirmation(Stage stage){
         stage.setOnCloseRequest((WindowEvent we) ->
