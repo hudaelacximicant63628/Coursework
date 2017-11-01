@@ -1,3 +1,5 @@
+package Models;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -105,24 +107,37 @@ import java.util.Optional;
             tableView.setMinHeight(470);
             //---------------------------------------------------------------------------------------------------------------------
             //TABLE COLUMNS
-            ObservableList<Assignments> assignmentsData = FXCollections.observableArrayList();
+            ObservableList<AssignmentsView> assignmentsData = FXCollections.observableArrayList();
             //has equal spacing for each column
-            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
             tableView.setPrefSize(400, 300);
             tableView.setItems(assignmentsData);
 
-            TableColumn classroomColumn = new TableColumn<>("Classroom");
-            classroomColumn.setCellValueFactory(new PropertyValueFactory<>("classroom"));
-            tableView.getColumns().add(classroomColumn);
+            TableColumn titleColumn = new TableColumn<>("Title");
+            titleColumn.setMinWidth(200);
+            titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+            tableView.getColumns().add(titleColumn);
 
-            TableColumn descriptionColumn = new TableColumn<>("Description");
-            descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-            tableView.getColumns().add(descriptionColumn);
+            TableColumn classColumn = new TableColumn<>("Class");
+            classColumn.setCellValueFactory(new PropertyValueFactory<>("classroom"));
+            tableView.getColumns().add(classColumn);
 
-            TableColumn deadlineColumn = new TableColumn<>("Date");
+            TableColumn formatColumn = new TableColumn<>("Format");
+            formatColumn.setCellValueFactory(new PropertyValueFactory<>("format"));
+            tableView.getColumns().add(formatColumn);
+
+            TableColumn deadlineColumn = new TableColumn<>("Deadline");
             deadlineColumn.setCellValueFactory(new PropertyValueFactory<>("deadline"));
             tableView.getColumns().add(deadlineColumn);
+
+            TableColumn quantityColumn = new TableColumn<>("Quantity");
+            quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+            tableView.getColumns().add(quantityColumn);
+
+            TableColumn descriptionColumn = new TableColumn<>("Description");
+            descriptionColumn.setMinWidth(500);
+            descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+            tableView.getColumns().add(descriptionColumn);
 
 
 

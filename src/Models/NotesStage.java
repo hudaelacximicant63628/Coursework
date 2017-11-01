@@ -1,3 +1,5 @@
+package Models;
+
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -24,8 +26,8 @@ public class NotesStage extends Application{
         stage.setTitle("Notes");
         Image icon = new Image(getClass().getResourceAsStream("school_planner_icon.png"));
         stage.getIcons().add(icon);
-        stage.setMinHeight(580);
-        stage.setMinWidth(1000);
+        stage.setMaxHeight(580);
+        stage.setMaxWidth(1200);
 
 
         notes = new Button("Notes");
