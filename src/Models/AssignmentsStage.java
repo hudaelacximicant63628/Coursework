@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -37,6 +37,9 @@ import java.util.Optional;
         private DatePicker DOB;
         private TextField userName;
         private TextField lastName;
+
+        public static DatabaseConnection database;
+        private ClassroomService classroomService = new ClassroomService();
 
         public static void main(String[] args) {
             launch(args);
@@ -97,6 +100,19 @@ import java.util.Optional;
             Image icon = new Image(getClass().getResourceAsStream("school_planner_icon.png"));
             stage.getIcons().add(icon);
 
+            //checking if database interacts with java code
+
+            database = new DatabaseConnection("src/Models/coursework.db");
+            ArrayList<Classroom> classrooms = new ArrayList<>();
+
+            classroomService.selectAll(classrooms, database);
+            System.out.println(ClassroomService.selectById("Computing 7", database));
+
+            for(Classroom i : classrooms){
+                System.out.println(i);
+            }
+
+            //Button--------------------------------------------------------------------------------------------------
 
             add.setOnAction(e -> System.out.println("Add feature has not been implemented"));
             remove.setOnAction(e -> System.out.println("Remove features has not been implemented"));

@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AssignmentsView {
@@ -96,6 +97,7 @@ public class AssignmentsView {
     public void setDeadline(Date deadline) {
         this.deadline.set(deadline);
     }
+
 
     @Override
     public String toString() {

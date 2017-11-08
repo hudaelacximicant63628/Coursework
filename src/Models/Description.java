@@ -1,8 +1,5 @@
 package Models;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-
 public class Description {
     private int descriptionID;
     private String description;

@@ -74,12 +74,10 @@ public class NotesStage extends Application{
         Scene assignmentScene = new Scene(notesStageVBox);
 
         deleteNote.setOnAction(e -> notesData.remove(selectedItems.get(0)));
-
         addNote.setOnAction(e -> notesData.add(note.getText()));
+
         notes.setOnAction(e -> stage.setScene(assignmentScene));
         user.setOnAction(e -> stage.setScene(userScene));
-
-
 
         notesTableView.setItems(notesData);
 

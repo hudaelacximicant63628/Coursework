@@ -1,7 +1,5 @@
 package Models;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import java.util.Date;
 
 public class Assignments {
