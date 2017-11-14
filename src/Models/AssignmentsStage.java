@@ -123,7 +123,11 @@ import java.util.Optional;
             tableView.setMinHeight(470);
             //---------------------------------------------------------------------------------------------------------------------
             //TABLE COLUMNS
+            ArrayList<AssignmentsView> assignmentsViews = new ArrayList<>();
+            AssignmentsViewService.selectAll(assignmentsViews, database);
+
             ObservableList<AssignmentsView> assignmentsData = FXCollections.observableArrayList();
+            assignmentsData.addAll(assignmentsViews);
             //has equal spacing for each column
 
             tableView.setPrefSize(400, 300);

@@ -1,15 +1,15 @@
 package Models;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Assignments {
 
     private int assignmentID;
     private Classroom classroom;
     private Description description;
-    private Date deadline;
+    private LocalDate deadline;
 
-    public Assignments(int assignmentID, Classroom classroom, Description description, Date deadline) {
+    public Assignments(int assignmentID, Classroom classroom, Description description, LocalDate deadline) {
         this.assignmentID = assignmentID;
         this.classroom = classroom;
         this.description = description;
@@ -29,7 +29,7 @@ public class Assignments {
         return description;
     }
 
-    public Date getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
@@ -45,7 +45,7 @@ public class Assignments {
         this.description = description;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
