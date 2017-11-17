@@ -1,5 +1,6 @@
 package Models;
 
+import Controllers.MainControllers;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Optional;
 
 
@@ -38,8 +39,8 @@ import java.util.Optional;
         private TextField userName;
         private TextField lastName;
 
-        public static DatabaseConnection database;
-        private ClassroomService classroomService = new ClassroomService();
+        private MainControllers mainControllers;
+        private static AssignmentsView enteredData;
 
         public static void main(String[] args) {
             launch(args);
@@ -97,24 +98,17 @@ import java.util.Optional;
             Scene userScene = new Scene(userSceneVBOX, 300, 150);
             stage.setTitle("School planner");
 
-            Image icon = new Image(getClass().getResourceAsStream("school_planner_icon.png"));
+            Image icon = new Image(getClass().getResourceAsStream("/Resources/school_planner_icon.png"));
             stage.getIcons().add(icon);
 
-            //checking if database interacts with java code
-
-            database = new DatabaseConnection("src/Models/coursework.db");
-            ArrayList<Classroom> classrooms = new ArrayList<>();
-
-            classroomService.selectAll(classrooms, database);
-            System.out.println(ClassroomService.selectById("Computing 7", database));
-
-            for(Classroom i : classrooms){
-                System.out.println(i);
-            }
+            mainControllers = new MainControllers();
 
             //Button--------------------------------------------------------------------------------------------------
 
-            add.setOnAction(e -> System.out.println("Add feature has not been implemented"));
+            add.setOnAction(e -> {
+                        writeEnteredData();
+                        mainControllers.addAssignment();
+                    });
             remove.setOnAction(e -> System.out.println("Remove features has not been implemented"));
             modify.setOnAction(e -> System.out.println("Modifying feature has not been implemented"));
             userSceneButton.setOnAction(e -> stage.setScene(userScene));
@@ -123,7 +117,9 @@ import java.util.Optional;
             tableView.setMinHeight(470);
             //---------------------------------------------------------------------------------------------------------------------
             //TABLE COLUMNS
+
             ObservableList<AssignmentsView> assignmentsData = FXCollections.observableArrayList();
+            assignmentsData.addAll(mainControllers.updateAssignmentsViewTableView());
             //has equal spacing for each column
 
             tableView.setPrefSize(400, 300);
@@ -167,6 +163,21 @@ import java.util.Optional;
 
         }
 
+        public void writeEnteredData(){
+                String classroom = this.className.getText();
+                String description = this.description.getText();
+                String title = this.title.getText();
+                String teacher = this.teacherName.getText();
+                int quantity = Integer.parseInt(this.quantity.getText());
+                String format = this.format.getText();
+                LocalDate deadline = this.deadline.getValue();
+
+                enteredData = new AssignmentsView(teacher, classroom,description,title,quantity,format,deadline);
+
+            }
+
+
+
         private void closeConfirmation(Stage stage){
             stage.setOnCloseRequest((WindowEvent we) ->
             {
@@ -181,5 +192,52 @@ import java.util.Optional;
                 }
             });
         }
+
+        public DatePicker getDOB() {
+            return DOB;
+        }
+
+        public TextField getUserName() {
+            return userName;
+        }
+
+        public TextField getLastName() {
+            return lastName;
+        }
+
+        public DatePicker getDeadline() {
+            return deadline;
+        }
+
+        public TextField getTeacherName() {
+            return teacherName;
+        }
+
+        public TextField getClassName() {
+            return className;
+        }
+
+        public TextField getDescription() {
+            return description;
+        }
+
+        public TextField getTitle() {
+            return title;
+        }
+
+        public TextField getQuantity() {
+            return quantity;
+        }
+
+        public TextField getFormat() {
+            return format;
+        }
+
+        public static AssignmentsView getEnteredData(){
+            AssignmentsView enteredDataCopy = enteredData;
+            return enteredDataCopy;
+        }
+
+
 
     }

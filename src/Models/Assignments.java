@@ -1,18 +1,18 @@
 package Models;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Assignments {
 
     private int assignmentID;
-    private Classroom classroom;
-    private Description description;
-    private Date deadline;
+    private String classroom;
+    private int descriptionID;
+    private LocalDate deadline;
 
-    public Assignments(int assignmentID, Classroom classroom, Description description, Date deadline) {
+    public Assignments(int assignmentID, String classroom, int description, LocalDate deadline) {
         this.assignmentID = assignmentID;
         this.classroom = classroom;
-        this.description = description;
+        this.descriptionID = description;
         this.deadline = deadline; {
         };
     }
@@ -21,15 +21,15 @@ public class Assignments {
         return assignmentID;
     }
 
-    public Classroom getClassroom() {
+    public String getClassroom() {
         return classroom;
     }
 
-    public Description getDescription() {
-        return description;
+    public int getDescriptionID() {
+        return descriptionID;
     }
 
-    public Date getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
@@ -37,15 +37,15 @@ public class Assignments {
         this.assignmentID = assignmentID;
     }
 
-    public void setClassroom(Classroom classroom) {
+    public void setClassroom(String classroom) {
         this.classroom = classroom;
     }
 
-    public void setDescription(Description description) {
-        this.description = description;
+    public void setDescriptionID(int descriptionID) {
+        this.descriptionID = descriptionID;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
@@ -54,7 +54,7 @@ public class Assignments {
         return "Assignments{" +
                 "assignmentID=" + assignmentID +
                 ", classroom=" + classroom +
-                ", description=" + description +
+                ", descriptionID=" + descriptionID +
                 ", deadline=" + deadline +
                 '}';
     }

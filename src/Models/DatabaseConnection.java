@@ -29,6 +29,28 @@ public class DatabaseConnection {
 
     }
 
+    public int lastNewId()
+    {
+
+        PreparedStatement statement = newStatement("SELECT last_insert_rowid() As 'ID'");
+        try
+        {
+            if (statement != null)
+            {
+                ResultSet results = runQuery(statement);
+                if (results != null)
+                {
+                    return (results.getInt("ID"));
+                }
+            }
+        }
+        catch (SQLException exception)
+        {
+            System.out.println("Database new id retrieval error: " + exception.getMessage());
+        }
+        return -1;
+
+    }
 
     public PreparedStatement newStatement(String query)
     {

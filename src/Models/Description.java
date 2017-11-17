@@ -4,10 +4,10 @@ public class Description {
     private int descriptionID;
     private String description;
     private String title;
-    private String quantity;
+    private int quantity;
     private String format;
 
-    public Description(int descriptionID, String description, String title, String quantity, String format) {
+    public Description(int descriptionID, String description, String title, int quantity, String format) {
         this.descriptionID = descriptionID;
         this.description = description;
         this.title = title;
@@ -39,11 +39,11 @@ public class Description {
         this.title = title;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

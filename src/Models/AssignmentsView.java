@@ -4,19 +4,32 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.ArrayList;
 
 public class AssignmentsView {
+    private String teacher;
     private final SimpleStringProperty description;
     private final SimpleStringProperty title;
     private final SimpleIntegerProperty quantity;
     private final SimpleStringProperty format;
     private final SimpleStringProperty classroom;
-    private final SimpleObjectProperty<Date> deadline;
+    private final SimpleObjectProperty<LocalDate> deadline;
 
-    public AssignmentsView(String classroom, String description, String title, int quantity, String format, Date deadline) {
+
+    public AssignmentsView(String classroom, String description, String title, int quantity, String format, LocalDate deadline) {
         this.description = new SimpleStringProperty(description);
+        this.title = new SimpleStringProperty(title);
+        this.quantity = new SimpleIntegerProperty(quantity);
+        this.format = new SimpleStringProperty(format);
+        this.classroom = new SimpleStringProperty(classroom);
+        this.deadline = new SimpleObjectProperty<>(deadline);
+
+    }
+    public AssignmentsView(String teacher, String classroom, String description, String title, int quantity, String format, LocalDate deadline) {
+        this.description = new SimpleStringProperty(description);
+        this.teacher = teacher;
         this.title = new SimpleStringProperty(title);
         this.quantity = new SimpleIntegerProperty(quantity);
         this.format = new SimpleStringProperty(format);
@@ -85,19 +98,25 @@ public class AssignmentsView {
         this.classroom.set(classroom);
     }
 
-
-    public Date getDeadline() {
+    public LocalDate getDeadline() {
         return deadline.get();
     }
 
-    public SimpleObjectProperty<Date> deadlineProperty() {
+    public SimpleObjectProperty<LocalDate> deadlineProperty() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline.set(deadline);
     }
 
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
 
     @Override
     public String toString() {
