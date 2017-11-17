@@ -1,15 +1,20 @@
 package Controllers;
 
 import Models.*;
-import javafx.scene.control.DatePicker;
-import jdk.nashorn.internal.ir.Assignment;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+
 
 public class MainControllers {
     private ArrayList<AssignmentsView> assignmentsViewList;
     private AssignmentsStage assignmentsStage;
+
+    private static ArrayList<Integer> descriptionIdTracker = new ArrayList<>();
+    private static ArrayList<Integer> assignmentIdTracker = new ArrayList<>();
+
+
 
     private ArrayList<AssignmentsView> targetList;
     public DatabaseConnection databaseConnection ;
@@ -21,28 +26,42 @@ public class MainControllers {
 
     public boolean addAssignment(){
 
-            AssignmentsView data = AssignmentsStage.getEnteredData();
+            AssignmentsView data = AssignmentsStage.getUserEnteredData();
 
 
             //adds to database
-            Description databaseDescription = new Description(0, data.getDescription(), data.getTitle(), data.getQuantity(), data.getFormat());
-            Classroom databaseClassroom = new Classroom(data.getClassroom(), data.getTeacher());
-            Assignments databaseAssignments = new Assignments(0, databaseClassroom.getClassroom(), databaseDescription.getDescriptionID(), data.getDeadline());
+            Description saveDescriptionToDatabase = new Description(0, data.getDescription(), data.getTitle(), data.getQuantity(), data.getFormat());
+            Classroom saveClassroomToDatabase = new Classroom(data.getClassroom(), data.getTeacher());
+            Assignments saveAssignmentToDatabase = new Assignments(0, saveClassroomToDatabase.getClassroom(), saveDescriptionToDatabase.getDescriptionID(), data.getDeadline());
 
-            System.out.println(databaseDescription.getDescription());
+            AssignmentService.save(saveDescriptionToDatabase, saveClassroomToDatabase, databaseConnection);
+            AssignmentService.saveToAssignments(saveDescriptionToDatabase.getDescriptionID(), saveClassroomToDatabase.getClassroom(), saveAssignmentToDatabase, databaseConnection);
 
-            AssignmentService.save(databaseDescription, databaseClassroom, databaseConnection);
-            AssignmentService.saveToAssignments(databaseDescription.getDescriptionID(), databaseClassroom.getClassroom(), databaseAssignments, databaseConnection);
+
+            //TRACKS THE PK OF THE DESCRIPTION AND ASSIGNMENT TABLE
+            descriptionIdTracker.add(saveDescriptionToDatabase.getDescriptionID());
+            assignmentIdTracker.add(saveAssignmentToDatabase.getAssignmentID());
+
+            for(int i : descriptionIdTracker){
+                System.out.println(i);
+            }
+            for(int j : assignmentIdTracker){
+                System.out.println(j);
+            }
+
+
+
+            updateAssignmentsViewTableView();
 
 //        }
         return true;
 
     }
 
-    public ArrayList updateAssignmentsViewTableView(){
+    public void updateAssignmentsViewTableView(){
         targetList= new ArrayList<>();
-        AssignmentService.selectAll(targetList, databaseConnection);
-        return targetList;
+        AssignmentsStage.getTableViewData().clear();
+        AssignmentService.selectAll(AssignmentsStage.getTableViewData(), databaseConnection);
     }
 
 }

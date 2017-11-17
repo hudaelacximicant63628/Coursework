@@ -41,6 +41,7 @@ import java.util.Optional;
 
         private MainControllers mainControllers;
         private static AssignmentsView enteredData;
+        private static ObservableList<AssignmentsView> tableViewData = FXCollections.observableArrayList();
 
         public static void main(String[] args) {
             launch(args);
@@ -118,12 +119,10 @@ import java.util.Optional;
             //---------------------------------------------------------------------------------------------------------------------
             //TABLE COLUMNS
 
-            ObservableList<AssignmentsView> assignmentsData = FXCollections.observableArrayList();
-            assignmentsData.addAll(mainControllers.updateAssignmentsViewTableView());
             //has equal spacing for each column
 
             tableView.setPrefSize(400, 300);
-            tableView.setItems(assignmentsData);
+            tableView.setItems(tableViewData);
 
             TableColumn titleColumn = new TableColumn<>("Title");
             titleColumn.setMinWidth(200);
@@ -156,10 +155,10 @@ import java.util.Optional;
 
             //---------------------------------------------------------------------------------------------------------------------
 
+            mainControllers.updateAssignmentsViewTableView();
             closeConfirmation(stage);
             stage.setScene(assignmentScene);
             stage.show();
-
 
         }
 
@@ -233,10 +232,14 @@ import java.util.Optional;
             return format;
         }
 
-        public static AssignmentsView getEnteredData(){
+        public static AssignmentsView getUserEnteredData(){
             AssignmentsView enteredDataCopy = enteredData;
             return enteredDataCopy;
         }
+        public static ObservableList getTableViewData(){
+            return tableViewData;
+        }
+
 
 
 

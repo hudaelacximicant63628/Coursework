@@ -176,8 +176,8 @@ public class AssignmentService {
                 statement.setString(1, classroom);
                 statement.setInt(2, descriptionid);
                 statement.setString(3, assignmentsDeadlineToString );
-                assignments.setAssignmentID(database.lastNewId());
                 database.executeUpdate(statement);
+                assignments.setAssignmentID(database.lastNewId());
             }
             else {
                 PreparedStatement statement = database.newStatement("UPDATE Assignments SET DescriptionID = ?, Deadline = ? WHERE AssignmentID = ?");
