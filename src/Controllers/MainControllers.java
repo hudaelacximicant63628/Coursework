@@ -13,7 +13,7 @@ public class MainControllers {
 
     private static ArrayList<Integer> descriptionIdTracker = new ArrayList<>();
     private static ArrayList<Integer> assignmentIdTracker = new ArrayList<>();
-
+    private static ArrayList<Integer> userIdTracker = new ArrayList<>();
 
 
     private ArrayList<AssignmentsView> targetList;
@@ -24,10 +24,18 @@ public class MainControllers {
         this.databaseConnection = new DatabaseConnection("coursework.db");
     }
 
-    public boolean addAssignment(){
 
-            AssignmentsView data = AssignmentsStage.getUserEnteredData();
 
+    public boolean addAssignment() {
+
+        AssignmentsView data = AssignmentsStage.getUserEnteredData();
+
+        UserView userDataEntered = AssignmentsStage.userViewInfo;
+
+        if (userDataEntered != null) {
+
+            User saveUserToDatabase = new User(0,userDataEntered.getFirstName(), userDataEntered.getLastname(), userDataEntered.getDOB());
+            UserService.save(saveUserToDatabase, databaseConnection);
 
             //adds to database
             Description saveDescriptionToDatabase = new Description(0, data.getDescription(), data.getTitle(), data.getQuantity(), data.getFormat());
@@ -38,24 +46,30 @@ public class MainControllers {
             AssignmentService.saveToAssignments(saveDescriptionToDatabase.getDescriptionID(), saveClassroomToDatabase.getClassroom(), saveAssignmentToDatabase, databaseConnection);
 
 
+
+
             //TRACKS THE PK OF THE DESCRIPTION AND ASSIGNMENT TABLE
             descriptionIdTracker.add(saveDescriptionToDatabase.getDescriptionID());
             assignmentIdTracker.add(saveAssignmentToDatabase.getAssignmentID());
+            userIdTracker.add(saveUserToDatabase.getId());
 
-            for(int i : descriptionIdTracker){
+            for (int i : descriptionIdTracker) {
                 System.out.println(i);
             }
-            for(int j : assignmentIdTracker){
+            for (int j : assignmentIdTracker) {
                 System.out.println(j);
             }
-
+            for(int m : userIdTracker){
+                System.out.println(m);
+            }
 
 
             updateAssignmentsViewTableView();
 
-//        }
-        return true;
+            return true;
 
+        }
+        return false;
     }
 
     public void updateAssignmentsViewTableView(){

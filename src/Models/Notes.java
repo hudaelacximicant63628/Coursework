@@ -4,12 +4,12 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Notes {
     private int notesID;
-    private User userID;
+    private UserView userViewID;
     private final SimpleStringProperty notes;
 
-    public Notes(int notesID, User userID, String notes) {
+    public Notes(int notesID, UserView userViewID, String notes) {
         this.notesID = notesID;
-        this.userID = userID;
+        this.userViewID = userViewID;
         this.notes = new SimpleStringProperty(notes);
     }
 
@@ -17,8 +17,8 @@ public class Notes {
         return notesID;
     }
 
-    public User getUserID() {
-        return userID;
+    public UserView getUserViewID() {
+        return userViewID;
     }
 
     public String getNotes() {
@@ -29,8 +29,8 @@ public class Notes {
         this.notesID = notesID;
     }
 
-    public void setUserID(User userID) {
-        this.userID = userID;
+    public void setUserViewID(UserView userViewID) {
+        this.userViewID = userViewID;
     }
 
     public void setNotes(String notes) { this.notes.set(notes);
@@ -40,7 +40,7 @@ public class Notes {
     public String toString() {
         return "Notes{" +
                 "notesID=" + notesID +
-                ", userID=" + userID +
+                ", userViewID=" + userViewID +
                 ", notes='" + notes + '\'' +
                 '}';
     }

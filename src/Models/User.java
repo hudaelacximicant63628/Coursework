@@ -1,64 +1,49 @@
 package Models;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 public class User {
-    private int userID;
-    private final SimpleStringProperty firstName;
-    private final SimpleStringProperty lastname;
-    private final ObjectProperty<Date> DOB;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private LocalDate DOB;
 
-    public User(int userID, String firstName, String lastname, Date DOB) {
-        this.userID = userID;
-        this.firstName = new SimpleStringProperty(firstName);
-        this.lastname = new SimpleStringProperty(lastname);
-        this.DOB = new SimpleObjectProperty<>(DOB);
+    public User(int id, String firstName, String lastName, LocalDate DOB) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.DOB = DOB;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
-        return firstName.get();
-    }
-
-    public String getLastname() {
-        return lastname.get();
-    }
-
-    public Date getDOB() {
-        return DOB.get();
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName.set(firstName);
+        this.firstName = firstName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname.set(lastname);
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setDOB(Date DOB) {
-        this.DOB.set(DOB);
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userID=" + userID +
-                ", firstName='" + firstName + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", DOB='" + DOB + '\'' +
-                '}';
+    public LocalDate getDOB() {
+        return DOB;
+    }
+
+    public void setDOB(LocalDate DOB) {
+        this.DOB = DOB;
     }
 }
-

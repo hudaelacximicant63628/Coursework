@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -34,6 +35,7 @@ import java.util.Optional;
         private TextField title;
         private TextField quantity;
         private TextField format;
+        private TextArea errorReporter;
 
         private DatePicker DOB;
         private TextField userName;
@@ -42,6 +44,7 @@ import java.util.Optional;
         private MainControllers mainControllers;
         private static AssignmentsView enteredData;
         private static ObservableList<AssignmentsView> tableViewData = FXCollections.observableArrayList();
+        public static UserView userViewInfo;
 
         public static void main(String[] args) {
             launch(args);
@@ -54,7 +57,7 @@ import java.util.Optional;
             add = new Button("Add");
             remove = new Button("Remove");
             modify = new Button("Modify");
-            userSceneButton = new Button("User");
+            userSceneButton = new Button("UserView");
             AssignmentSceneButton = new Button("Assignments");
 
             DOB = new DatePicker();
@@ -78,12 +81,16 @@ import java.util.Optional;
             quantity.setPromptText("Enter quantity");
             format = new TextField();
             format.setPromptText("Enter format");
+            errorReporter = new TextArea();
+            errorReporter.setMaxHeight(100);
+            errorReporter.setEditable(false);
+            errorReporter.setStyle("-fx-font-size: 20");
 
             HBox assignmentSceneHBox = new HBox();
             assignmentSceneHBox.getChildren().addAll(add, remove, modify, userSceneButton);
 
             VBox assignmentSceneVBox = new VBox();
-            assignmentSceneVBox.getChildren().addAll(tableView, title, description, className, teacherName, deadline, quantity, format, assignmentSceneHBox);
+            assignmentSceneVBox.getChildren().addAll(tableView, title, description, className, teacherName, deadline, quantity, format, assignmentSceneHBox, errorReporter);
             assignmentSceneVBox.setSpacing(2);
 
             VBox userSceneVBOX = new VBox();
@@ -95,7 +102,7 @@ import java.util.Optional;
             assignmentSceneHBox.setPadding(new Insets(10,20,20,20));
             assignmentSceneHBox.setSpacing(10);
 
-            Scene assignmentScene = new Scene(assignmentSceneVBox, 1000, 700);
+            Scene assignmentScene = new Scene(assignmentSceneVBox, 1000, 830);
             Scene userScene = new Scene(userSceneVBOX, 300, 150);
             stage.setTitle("School planner");
 
@@ -107,6 +114,7 @@ import java.util.Optional;
             //Button--------------------------------------------------------------------------------------------------
 
             add.setOnAction(e -> {
+                        getUserInfo();
                         writeEnteredData();
                         mainControllers.addAssignment();
                     });
@@ -162,7 +170,21 @@ import java.util.Optional;
 
         }
 
+        public void getUserInfo() {
+            String firstName = userName.getText();
+            String lastName = this.lastName.getText();
+            LocalDate DOB = this.DOB.getValue();
+
+            if (firstName == null || lastName == null || DOB == null) {
+                errorReporter.setText("User info has not been filled in correctly" + "\n");
+                userViewInfo = null;
+            } else {
+                userViewInfo = new UserView(firstName, lastName, DOB);
+            }
+        }
+
         public void writeEnteredData(){
+            try {
                 String classroom = this.className.getText();
                 String description = this.description.getText();
                 String title = this.title.getText();
@@ -171,9 +193,11 @@ import java.util.Optional;
                 String format = this.format.getText();
                 LocalDate deadline = this.deadline.getValue();
 
-                enteredData = new AssignmentsView(teacher, classroom,description,title,quantity,format,deadline);
-
-            }
+                enteredData = new AssignmentsView(teacher, classroom, description, title, quantity, format, deadline);
+            }catch(NumberFormatException e){
+                    errorReporter.appendText("Options have not been filled properly");
+                }
+        }
 
 
 

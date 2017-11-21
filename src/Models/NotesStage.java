@@ -34,7 +34,7 @@ public class NotesStage extends Application{
         listView = new ListView();
         VBox userSceneVBox = new VBox();
         userSceneVBox.getChildren().addAll(listView, notes);
-        user = new Button("User");
+        user = new Button("UserView");
 
 
 
