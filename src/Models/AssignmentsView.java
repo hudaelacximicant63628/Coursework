@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.ArrayList;
 
 public class AssignmentsView {
+    private int assignmentID;
+    private int descriptionID;
     private String teacher;
     private final SimpleStringProperty description;
     private final SimpleStringProperty title;
@@ -18,13 +20,15 @@ public class AssignmentsView {
     private final SimpleObjectProperty<LocalDate> deadline;
 
 
-    public AssignmentsView(String classroom, String description, String title, int quantity, String format, LocalDate deadline) {
+    public AssignmentsView(int assignmentID, int descriptionID, String classroom, String description, String title, int quantity, String format, LocalDate deadline) {
         this.description = new SimpleStringProperty(description);
         this.title = new SimpleStringProperty(title);
         this.quantity = new SimpleIntegerProperty(quantity);
         this.format = new SimpleStringProperty(format);
         this.classroom = new SimpleStringProperty(classroom);
         this.deadline = new SimpleObjectProperty<>(deadline);
+        this.assignmentID = assignmentID;
+        this.descriptionID = descriptionID;
 
     }
     public AssignmentsView(String teacher, String classroom, String description, String title, int quantity, String format, LocalDate deadline) {
@@ -36,6 +40,22 @@ public class AssignmentsView {
         this.classroom = new SimpleStringProperty(classroom);
         this.deadline = new SimpleObjectProperty<>(deadline);
 
+    }
+
+    public int getAssignmentID() {
+        return assignmentID;
+    }
+
+    public void setAssignmentID(int assignmentID) {
+        this.assignmentID = assignmentID;
+    }
+
+    public int getDescriptionID() {
+        return descriptionID;
+    }
+
+    public void setDescriptionID(int descriptionID) {
+        this.descriptionID = descriptionID;
     }
 
     public String getDescription() {
@@ -121,7 +141,10 @@ public class AssignmentsView {
     @Override
     public String toString() {
         return "AssignmentsView{" +
-                "description=" + description +
+                "assignmentID=" + assignmentID +
+                ", descriptionID=" + descriptionID +
+                ", teacher='" + teacher + '\'' +
+                ", description=" + description +
                 ", title=" + title +
                 ", quantity=" + quantity +
                 ", format=" + format +

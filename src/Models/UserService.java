@@ -5,8 +5,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class UserService {
+
+    public static void selectAll(List<UserView> targetList, DatabaseConnection database) {
+
+
+
+        PreparedStatement statement1 = database.newStatement("SELECT UserID, Firstname, Lastname, DOB FROM SchoolUser ORDER BY UserID");
+
+        try {
+            if (statement1 != null) {
+
+                ResultSet results1 = database.runQuery(statement1);
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                if (results1 != null) {
+                    while (results1.next()) {
+
+                        LocalDate dob = LocalDate.parse(results1.getString("DOB"), formatter);
+                        targetList.add(new UserView(results1.getInt("UserID"), results1.getString("Firstname"), results1.getString("Lastname"), dob));
+                    }
+                }
+            }
+
+        } catch (SQLException resultsException) {
+            System.out.println("Database select all error: " + resultsException.getMessage());
+        }
+    }
 
     public static Object selectById(int id, DatabaseConnection database) {
 

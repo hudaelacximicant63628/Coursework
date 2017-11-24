@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import jdk.nashorn.internal.ir.Assignment;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.Optional;
 
     public class AssignmentsStage extends Application {
         private Button add;
+        private Button addUser;
         private Button remove;
         private Button modify;
         private Button userSceneButton;
@@ -36,6 +38,7 @@ import java.util.Optional;
         private TextField quantity;
         private TextField format;
         private TextArea errorReporter;
+        private ListView userListView;
 
         private DatePicker DOB;
         private TextField userName;
@@ -52,9 +55,11 @@ import java.util.Optional;
 
         @Override
         public void start(Stage stage) {
-            TableView tableView = new TableView();
+            TableView<AssignmentsView> tableView = new TableView();
 
             add = new Button("Add");
+            addUser = new Button("Add user");
+
             remove = new Button("Remove");
             modify = new Button("Modify");
             userSceneButton = new Button("UserView");
@@ -85,6 +90,10 @@ import java.util.Optional;
             errorReporter.setMaxHeight(100);
             errorReporter.setEditable(false);
             errorReporter.setStyle("-fx-font-size: 20");
+            userListView = new ListView();
+
+
+            HBox userSceneHBox = new HBox();
 
             HBox assignmentSceneHBox = new HBox();
             assignmentSceneHBox.getChildren().addAll(add, remove, modify, userSceneButton);
@@ -94,8 +103,10 @@ import java.util.Optional;
             assignmentSceneVBox.setSpacing(2);
 
             VBox userSceneVBOX = new VBox();
-            userSceneVBOX.getChildren().addAll(userName,lastName, DOB, AssignmentSceneButton);
+            userSceneVBOX.getChildren().addAll(userName,lastName, DOB, AssignmentSceneButton, addUser);
+            userSceneHBox.getChildren().addAll(userSceneVBOX, userListView);
             userSceneVBOX.setSpacing(10);
+            userSceneHBox.setSpacing(10);
 
             userSceneButton.setLineSpacing(10);
 
@@ -103,7 +114,7 @@ import java.util.Optional;
             assignmentSceneHBox.setSpacing(10);
 
             Scene assignmentScene = new Scene(assignmentSceneVBox, 1000, 830);
-            Scene userScene = new Scene(userSceneVBOX, 300, 150);
+            Scene userScene = new Scene(userSceneHBox, 300, 180);
             stage.setTitle("School planner");
 
             Image icon = new Image(getClass().getResourceAsStream("/Resources/school_planner_icon.png"));
@@ -111,20 +122,6 @@ import java.util.Optional;
 
             mainControllers = new MainControllers();
 
-            //Button--------------------------------------------------------------------------------------------------
-
-            add.setOnAction(e -> {
-                        getUserInfo();
-                        writeEnteredData();
-                        mainControllers.addAssignment();
-                    });
-            remove.setOnAction(e -> System.out.println("Remove features has not been implemented"));
-            modify.setOnAction(e -> System.out.println("Modifying feature has not been implemented"));
-            userSceneButton.setOnAction(e -> stage.setScene(userScene));
-            AssignmentSceneButton.setOnAction(e -> stage.setScene(assignmentScene));
-
-            tableView.setMinHeight(470);
-            //---------------------------------------------------------------------------------------------------------------------
             //TABLE COLUMNS
 
             //has equal spacing for each column
@@ -158,12 +155,31 @@ import java.util.Optional;
             descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
             tableView.getColumns().add(descriptionColumn);
 
+//            can be used to get ID selected from tableview so that data can be easily removed/updated
+//            tableView.getSelectionModel().getSelectedItem().getAssignmentID();
+//            tableView.getSelectionModel().getSelectedItem().getDescriptionID();
+//
 
+            //Button--------------------------------------------------------------------------------------------------
+
+            add.setOnAction(e -> {
+                getUserInfo();
+                writeEnteredData();
+                mainControllers.addAssignment();
+            });
+            remove.setOnAction(e -> System.out.println("Remove feature has not been implemented"));
+            modify.setOnAction(e -> System.out.println("Modifying feature has not been implemented"));
+            userSceneButton.setOnAction(e -> stage.setScene(userScene));
+            AssignmentSceneButton.setOnAction(e -> stage.setScene(assignmentScene));
+
+            tableView.setMinHeight(470);
+            //---------------------------------------------------------------------------------------------------------------------
 
 
             //---------------------------------------------------------------------------------------------------------------------
 
             mainControllers.updateAssignmentsViewTableView();
+            System.out.println(tableViewData.size());
             closeConfirmation(stage);
             stage.setScene(assignmentScene);
             stage.show();
@@ -179,7 +195,7 @@ import java.util.Optional;
                 errorReporter.setText("User info has not been filled in correctly" + "\n");
                 userViewInfo = null;
             } else {
-                userViewInfo = new UserView(firstName, lastName, DOB);
+                userViewInfo = new UserView(0,firstName, lastName, DOB);
             }
         }
 

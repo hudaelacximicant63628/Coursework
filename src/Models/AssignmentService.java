@@ -2,6 +2,8 @@ package Models;
 
 import javafx.util.converter.LocalDateStringConverter;
 
+import javax.crypto.spec.DESedeKeySpec;
+import javax.xml.transform.Result;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,9 +18,11 @@ public class AssignmentService {
     //used for assignmentsview table-view
     public static void selectAll(List<AssignmentsView> targetList, DatabaseConnection database) {
 
+
+
         PreparedStatement statement1 = database.newStatement("SELECT Class FROM Classroom ORDER BY Class");
-        PreparedStatement statement2 = database.newStatement("SELECT Quantity, Format, Title, Description FROM Description ORDER BY DescriptionID");
-        PreparedStatement statement3 = database.newStatement("SELECT Deadline FROM Assignments ORDER BY AssignmentID");
+        PreparedStatement statement2 = database.newStatement("SELECT DescriptionID, Quantity, Format, Title, Description FROM Description ORDER BY DescriptionID");
+        PreparedStatement statement3 = database.newStatement("SELECT AssignmentID, Deadline FROM Assignments ORDER BY AssignmentID");
 
         try {
             if (statement1 != null && statement2 != null && statement3 != null) {
@@ -33,7 +37,7 @@ public class AssignmentService {
                     while (results1.next() && results2.next() && results3.next()) {
 
                         LocalDate deadline = LocalDate.parse(results3.getString("Deadline"), formatter);
-                        targetList.add(new AssignmentsView(results1.getString("Class"), results2.getString("Description"), results2.getString("Title"), results2.getInt("Quantity"), results2.getString("Format"), deadline));
+                        targetList.add(new AssignmentsView(results3.getInt("AssignmentID"), results2.getInt("DescriptionID"),results1.getString("Class"), results2.getString("Description"), results2.getString("Title"), results2.getInt("Quantity"), results2.getString("Format"), deadline));
                     }
                 }
             }
@@ -42,6 +46,62 @@ public class AssignmentService {
             System.out.println("Database select all error: " + resultsException.getMessage());
         }
     }
+
+    public static void selectAll(User user, List<AssignmentsView> targetList, DatabaseConnection database) {
+
+        int userId = user.getId();
+        int assignmentID = 0;
+        int descriptionID = 0;
+        LocalDate deadline = null;
+        String classroom = null;
+        int quantity = 0;
+        String format = null;
+        String title = null;
+        String description = null;
+
+        PreparedStatement statement = database.newStatement(String.format("SELECT AssignmentID FROM SchoolPlanner WHERE UserID = %2d", userId));
+
+
+        try {
+            if (statement != null) {
+
+                ResultSet results1 = database.runQuery(statement);
+
+                if (results1 != null) {
+                    while (results1.next()) {
+                        assignmentID = results1.getInt("AssignmentID");
+                    }
+                    PreparedStatement statement2 = database.newStatement(String.format("SELECT Class, DescriptionID, Deadline FROM Assignments WHERE AssignmentID = %2d", assignmentID));
+                    if(database.runQuery(statement2) != null){
+                        ResultSet results2 = database.runQuery(statement2);
+                        while(results2.next()){
+                            deadline = LocalDate.parse(results2.getString("Deadline"));
+                            descriptionID = results2.getInt("DescriptionID");
+                            classroom = results2.getString("Class");
+                        }
+                        PreparedStatement statement3 = database.newStatement(String.format("SELECT Quantity, Format, Title, Description FROM Description WHERE DescriptionID = %2d", descriptionID));
+                        if(database.runQuery(statement3) != null){
+                            ResultSet results3 = database.runQuery(statement3);
+                            while (results3.next()){
+                                quantity = results3.getInt("Quantity");
+                                format = results3.getString("Format");
+                                title = results3.getString("Title");
+                                description = results3.getString("Description");
+                            }
+                            targetList.add(new AssignmentsView(assignmentID, descriptionID, classroom, description, title, quantity, format, deadline));
+                        }
+
+
+                    }
+
+
+                }
+            }
+        } catch (SQLException resultsException) {
+            System.out.println("Database select all error: " + resultsException.getMessage());
+        }
+    }
+
     //Select a certain ID from assignments-view class and users scene in assignment stage
     public static Object selectByIdClassroom(String tablename, int id, DatabaseConnection database) {
 
@@ -156,6 +216,19 @@ public class AssignmentService {
 
     }
 
+    public static void saveToPlanner(User user, Assignments assignments, DatabaseConnection database) {
+
+        try {
+                PreparedStatement statement = database.newStatement("INSERT INTO SchoolPlanner (UserID, AssignmentID) VALUES (?,?)");
+                statement.setInt(1, user.getId());
+                statement.setInt(2, assignments.getAssignmentID());
+                database.executeUpdate(statement);
+        } catch (SQLException resultsException) {
+            System.out.println("Database saving error: " + resultsException.getMessage());
+        }
+
+    }
+
     public static void saveToAssignments(int descriptionid, String classroom, Assignments assignments, DatabaseConnection database) {
 
         Object existingItem = null;
@@ -191,7 +264,6 @@ public class AssignmentService {
         }
 
     }
-
 
 
 }

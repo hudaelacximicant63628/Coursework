@@ -14,6 +14,7 @@ public class MainControllers {
     private static ArrayList<Integer> descriptionIdTracker = new ArrayList<>();
     private static ArrayList<Integer> assignmentIdTracker = new ArrayList<>();
     private static ArrayList<Integer> userIdTracker = new ArrayList<>();
+    private static User saveUserToDatabase;
 
 
     private ArrayList<AssignmentsView> targetList;
@@ -34,7 +35,7 @@ public class MainControllers {
 
         if (userDataEntered != null) {
 
-            User saveUserToDatabase = new User(0,userDataEntered.getFirstName(), userDataEntered.getLastname(), userDataEntered.getDOB());
+            saveUserToDatabase = new User(0,userDataEntered.getFirstName(), userDataEntered.getLastname(), userDataEntered.getDOB());
             UserService.save(saveUserToDatabase, databaseConnection);
 
             //adds to database
@@ -45,23 +46,27 @@ public class MainControllers {
             AssignmentService.save(saveDescriptionToDatabase, saveClassroomToDatabase, databaseConnection);
             AssignmentService.saveToAssignments(saveDescriptionToDatabase.getDescriptionID(), saveClassroomToDatabase.getClassroom(), saveAssignmentToDatabase, databaseConnection);
 
+            AssignmentService.saveToPlanner(saveUserToDatabase, saveAssignmentToDatabase, databaseConnection);
+
+
+
 
 
 
             //TRACKS THE PK OF THE DESCRIPTION AND ASSIGNMENT TABLE
-            descriptionIdTracker.add(saveDescriptionToDatabase.getDescriptionID());
-            assignmentIdTracker.add(saveAssignmentToDatabase.getAssignmentID());
-            userIdTracker.add(saveUserToDatabase.getId());
-
-            for (int i : descriptionIdTracker) {
-                System.out.println(i);
-            }
-            for (int j : assignmentIdTracker) {
-                System.out.println(j);
-            }
-            for(int m : userIdTracker){
-                System.out.println(m);
-            }
+//            descriptionIdTracker.add(saveDescriptionToDatabase.getDescriptionID());
+//            assignmentIdTracker.add(saveAssignmentToDatabase.getAssignmentID());
+//            userIdTracker.add(saveUserToDatabase.getId());
+//
+//            for (int i : descriptionIdTracker) {
+//                System.out.println(i);
+//            }
+//            for (int j : assignmentIdTracker) {
+//                System.out.println(j);
+//            }
+//            for(int m : userIdTracker){
+//                System.out.println(m);
+//            }
 
 
             updateAssignmentsViewTableView();
@@ -72,10 +77,21 @@ public class MainControllers {
         return false;
     }
 
+    public void addUser(){
+
+    }
+
     public void updateAssignmentsViewTableView(){
         targetList= new ArrayList<>();
         AssignmentsStage.getTableViewData().clear();
         AssignmentService.selectAll(AssignmentsStage.getTableViewData(), databaseConnection);
     }
+
+    public ObservableList loadUserInfo(){
+        ObservableList<UserView> userView = FXCollections.observableArrayList();
+        UserService.selectAll(userView, databaseConnection);
+        return userView;
+    }
+
 
 }
