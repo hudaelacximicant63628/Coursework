@@ -4,45 +4,49 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Notes {
     private int notesID;
-    private UserView userViewID;
+    private User userID;
     private final SimpleStringProperty notes;
 
-    public Notes(int notesID, UserView userViewID, String notes) {
+    public Notes(int notesID, User userID, SimpleStringProperty notes) {
         this.notesID = notesID;
-        this.userViewID = userViewID;
-        this.notes = new SimpleStringProperty(notes);
+        this.userID = userID;
+        this.notes = new SimpleStringProperty();
     }
 
     public int getNotesID() {
         return notesID;
     }
 
-    public UserView getUserViewID() {
-        return userViewID;
+    public void setNotesID(int notesID) {
+        this.notesID = notesID;
+    }
+
+    public User getUserID() {
+        return userID;
+    }
+
+    public void setUserID(User userID) {
+        this.userID = userID;
     }
 
     public String getNotes() {
         return notes.get();
     }
 
-    public void setNotesID(int notesID) {
-        this.notesID = notesID;
+    public SimpleStringProperty notesProperty() {
+        return notes;
     }
 
-    public void setUserViewID(UserView userViewID) {
-        this.userViewID = userViewID;
-    }
-
-    public void setNotes(String notes) { this.notes.set(notes);
+    public void setNotes(String notes) {
+        this.notes.set(notes);
     }
 
     @Override
     public String toString() {
         return "Notes{" +
                 "notesID=" + notesID +
-                ", userViewID=" + userViewID +
-                ", notes='" + notes + '\'' +
+                ", userID=" + userID +
+                ", notes=" + notes +
                 '}';
     }
-
 }

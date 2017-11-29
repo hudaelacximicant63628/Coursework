@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="90e450e5-9eaa-4902-993c-2ecdc781d021" name="Default" comment="CHANGE LOG:&#10;-USER-SERVICE NOW HAS SELECTALL METHOD&#10;-ASSIGNMENT-SERVICE CAN SELECT ITEMS FROM A SPECIFIC USER *NOT TESTED YET*&#10;-GUI CHANGES: LISTVIEW ADDED TO USER SCENE IN ASSIGNMENTS STAGE, HBOX USER SCENE, NEW BUTTON IN USER SCENE&#10;-METHOD TO LOAD USER INFO INTO LISTVIEW MADE *NOT WORKING*&#10;-ADD USER METHOD HAS BEEN INITIALISED BY NOT YET CREATED&#10;&#10;&#10;The FUNCTIONALITY of the DELETE AND MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE.">
+    <list default="true" id="90e450e5-9eaa-4902-993c-2ecdc781d021" name="Default" comment="CHANGE LOG:&#10;-TABLE-VIEW SELECTS SPECIFIC USERS ASSIGNMENTS&#10;-ADD BUTTON WORKS PERFECTLY&#10;-DELETE BUTTON WORKS PERFECTLY&#10;-MODIFY BUTTON SERVICE METHOD NEEDED IN ASSIGNMENTSSERVICE CLASS&#10;&#10;&#10;The FUNCTIONALITY of the MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE.&#10;FUNCTIONALITY OF ADD AND REMOVE NOTES SCENE DOES NOT WORK YET">
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Models/AssignmentsViewService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Models/UserView.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/coursework.db" afterPath="$PROJECT_DIR$/coursework.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controllers/MainControllers.java" afterPath="$PROJECT_DIR$/src/Controllers/MainControllers.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/AssignmentService.java" afterPath="$PROJECT_DIR$/src/Models/AssignmentService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/Assignments.java" afterPath="$PROJECT_DIR$/src/Models/Assignments.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/AssignmentsStage.java" afterPath="$PROJECT_DIR$/src/Models/AssignmentsStage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/AssignmentsView.java" afterPath="$PROJECT_DIR$/src/Models/AssignmentsView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/Notes.java" afterPath="$PROJECT_DIR$/src/Models/Notes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/User.java" afterPath="$PROJECT_DIR$/src/Models/User.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/UserService.java" afterPath="$PROJECT_DIR$/src/Models/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/UserView.java" afterPath="$PROJECT_DIR$/src/Models/UserView.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AssignmentsStage.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AssignmentsStage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Models/AssignmentsStage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="65" column="16" lean-forward="true" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
+            <state relative-caret-position="302">
+              <caret line="182" column="37" lean-forward="true" selection-start-line="182" selection-start-column="37" selection-end-line="182" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -34,11 +37,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainControllers.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainControllers.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controllers/MainControllers.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="46" column="31" lean-forward="true" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="31" />
+            <state relative-caret-position="176">
+              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding>
+                <element signature="e#370#371#0" expanded="true" />
+                <element signature="e#451#452#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Assignments.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Models/Assignments.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -47,19 +63,11 @@
       <file leaf-file-name="AssignmentService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Models/AssignmentService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Assignments.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Models/Assignments.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="187">
+              <caret line="77" column="111" lean-forward="false" selection-start-line="77" selection-start-column="111" selection-end-line="77" selection-end-column="111" />
+              <folding>
+                <marker date="1511964748508" expanded="true" signature="3030:3223" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -67,17 +75,20 @@
       <file leaf-file-name="AssignmentsView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Models/AssignmentsView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1510">
-              <caret line="141" column="18" lean-forward="false" selection-start-line="141" selection-start-column="18" selection-end-line="141" selection-end-column="18" />
+            <state relative-caret-position="0">
+              <caret line="0" column="15" lean-forward="true" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Models/UserService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="850">
+              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
               <folding>
-                <element signature="e#1880#1881#0" expanded="true" />
-                <element signature="e#1915#1916#0" expanded="true" />
-                <element signature="e#1968#1969#0" expanded="true" />
-                <element signature="e#2016#2017#0" expanded="true" />
-                <element signature="e#2053#2054#0" expanded="true" />
-                <element signature="e#2089#2090#0" expanded="true" />
-                <element signature="e#2144#2145#0" expanded="true" />
-                <element signature="e#2194#2195#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,44 +97,22 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Models/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="24" lean-forward="false" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+            <state relative-caret-position="714">
+              <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding>
+                <element signature="e#395#396#0" expanded="true" />
                 <element signature="e#420#421#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Models/UserView.java">
+      <file leaf-file-name="Notes.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Models/Notes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="67" column="18" lean-forward="false" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
-              <folding>
-                <element signature="e#725#726#0" expanded="true" />
-                <element signature="e#750#751#0" expanded="true" />
-                <element signature="e#783#784#0" expanded="true" />
-                <element signature="e#811#812#0" expanded="true" />
-                <element signature="e#847#848#0" expanded="true" />
-                <element signature="e#885#886#0" expanded="true" />
-                <element signature="e#940#941#0" expanded="true" />
-                <element signature="e#972#973#0" expanded="true" />
-                <element signature="e#1022#1023#0" expanded="true" />
-                <element signature="e#1067#1068#0" expanded="true" />
-                <element signature="e#1102#1103#0" expanded="true" />
-                <element signature="e#1139#1140#0" expanded="true" />
-                <element signature="e#1193#1194#0" expanded="true" />
-                <element signature="e#1224#1225#0" expanded="true" />
-                <element signature="e#1272#1273#0" expanded="true" />
-                <element signature="e#1315#1316#0" expanded="true" />
-                <element signature="e#1348#1349#0" expanded="true" />
-                <element signature="e#1380#1381#0" expanded="true" />
-                <element signature="e#1434#1435#0" expanded="true" />
-                <element signature="e#1460#1461#0" expanded="true" />
-                <element signature="e#1501#1502#0" expanded="true" />
-                <element signature="e#1534#1535#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="578">
+              <caret line="48" column="13" lean-forward="false" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -136,28 +125,6 @@
               <folding>
                 <element signature="e#856#857#0" expanded="true" />
                 <element signature="e#884#885#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DatabaseConnection.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Models/DatabaseConnection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Models/UserService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -179,6 +146,9 @@
       <find>import java.sql.SQLException;</find>
       <find>da</find>
       <find>database</find>
+      <find>UPDATEASSIGNMENTS</find>
+      <find>tableviewdata</find>
+      <find>getUserEnteredData</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -205,7 +175,6 @@
         <option value="$PROJECT_DIR$/src/Models/AssignmentsTableView.java" />
         <option value="$PROJECT_DIR$/src/Models/Classroom.java" />
         <option value="$PROJECT_DIR$/src/Models/NotesService.java" />
-        <option value="$PROJECT_DIR$/src/Models/Notes.java" />
         <option value="$PROJECT_DIR$/src/Models/ClassroomService.java" />
         <option value="$PROJECT_DIR$/src/Models/AssignmentsService.java" />
         <option value="$PROJECT_DIR$/src/Models/NotesStage.java" />
@@ -213,13 +182,14 @@
         <option value="$PROJECT_DIR$/src/Models/Description.java" />
         <option value="$PROJECT_DIR$/src/Models/MainControllers.java" />
         <option value="$PROJECT_DIR$/src/Models/DatabaseConnection.java" />
-        <option value="$PROJECT_DIR$/src/Models/Assignments.java" />
         <option value="$PROJECT_DIR$/src/Models/User1.java" />
+        <option value="$PROJECT_DIR$/src/Models/UserView.java" />
+        <option value="$PROJECT_DIR$/src/Models/UserService.java" />
+        <option value="$PROJECT_DIR$/src/Models/Notes.java" />
         <option value="$PROJECT_DIR$/src/Models/User.java" />
         <option value="$PROJECT_DIR$/src/Models/AssignmentsView.java" />
         <option value="$PROJECT_DIR$/src/Models/AssignmentService.java" />
-        <option value="$PROJECT_DIR$/src/Models/UserView.java" />
-        <option value="$PROJECT_DIR$/src/Models/UserService.java" />
+        <option value="$PROJECT_DIR$/src/Models/Assignments.java" />
         <option value="$PROJECT_DIR$/src/Models/AssignmentsStage.java" />
         <option value="$PROJECT_DIR$/src/Controllers/MainControllers.java" />
       </list>
@@ -238,9 +208,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-40" />
-    <option name="y" value="138" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1300" />
     <option name="height" value="1044" />
   </component>
@@ -262,6 +232,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -278,29 +249,22 @@
               <item name="CourseworkHrithik" type="b2602c69:ProjectViewProjectNode" />
               <item name="CourseworkHrithik" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CourseworkHrithik" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CourseworkHrithik" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="U:/IntelliJ/Coursework testing" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -823,7 +787,10 @@
       <workItem from="1510915316579" duration="5306000" />
       <workItem from="1510925871506" duration="3284000" />
       <workItem from="1511275373026" duration="4953000" />
-      <workItem from="1511520015015" duration="5318000" />
+      <workItem from="1511520015015" duration="5366000" />
+      <workItem from="1511874511846" duration="5367000" />
+      <workItem from="1511882147113" duration="559000" />
+      <workItem from="1511960910357" duration="4885000" />
     </task>
     <task id="LOCAL-00001" summary="kk">
       <created>1507283743282</created>
@@ -937,37 +904,44 @@
       <option name="project" value="LOCAL" />
       <updated>1511280211461</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="CHANGE LOG:&#10;-USER-SERVICE NOW HAS SELECTALL METHOD&#10;-ASSIGNMENT-SERVICE CAN SELECT ITEMS FROM A SPECIFIC USER *NOT TESTED YET*&#10;-GUI CHANGES: LISTVIEW ADDED TO USER SCENE IN ASSIGNMENTS STAGE, HBOX USER SCENE, NEW BUTTON IN USER SCENE&#10;-METHOD TO LOAD USER INFO INTO LISTVIEW MADE *NOT WORKING*&#10;-ADD-USER METHOD HAS BEEN INITIALISED BUT NOT YET CREATED&#10;&#10;&#10;The FUNCTIONALITY of the DELETE AND MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE.">
+      <created>1511525377618</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1511525377618</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79975000" />
+    <option name="totallyTimeSpent" value="90834000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <frame x="-8" y="-8" width="1300" height="1044" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32618025" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3251073" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3445946" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35923424" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3583691" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.178125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18691589" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997879" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39915523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1056,7 +1030,9 @@
     <MESSAGE value="CHANGE LOG:&#10;-ADD BUTTONS SUCCESSFULLY ADDS THE ASSIGNMENTS TO CLASSROOM, DESCRIPTION AND ASSIGNMENTS TABLE.&#10;-SELECT ALL IS WORKING CORRECTLY.&#10;-ASSIGNMENTS CLASS HAS CHANGED DATA-TYPES&#10;-FILES HAVE BEEN ORGANISED&#10;-ASSIGNMENTS VIEW SERVICE HAS BEEN REPLACED TO ASSIGNMENTS SERVICE&#10;-CLASSROOM SERVICE HAS BEEN REMOVED&#10;-ASSIGNMENTS SERVICE HAS BEEN UPDATED&#10;-LISTVIEWID HAS BEEN ADDED TO DATABASE CONNECTION CLASS&#10;-DATABASE STORES DATE AS A STRING WHICH IS CONVERTED TO A LOCALDATE WHEN USED BY THE PROGRAM.&#10;&#10;The functionality of the DELETE AND MODIFY BUTTON HAVE NOT BEEN STARTED YET." />
     <MESSAGE value="CHANGE LOG 2 HOURS AGO:&#10;-ADD BUTTONS SUCCESSFULLY ADDS THE ASSIGNMENTS TO CLASSROOM, DESCRIPTION AND ASSIGNMENTS TABLE.&#10;-SELECT ALL IS WORKING CORRECTLY.&#10;-ASSIGNMENTS CLASS HAS CHANGED DATA-TYPES&#10;-FILES HAVE BEEN ORGANISED&#10;-ASSIGNMENTS VIEW SERVICE HAS BEEN REPLACED TO ASSIGNMENTS SERVICE&#10;-CLASSROOM SERVICE HAS BEEN REMOVED&#10;-ASSIGNMENTS SERVICE HAS BEEN UPDATED&#10;-LISTVIEWID HAS BEEN ADDED TO DATABASE CONNECTION CLASS&#10;-DATABASE STORES DATE AS A STRING WHICH IS CONVERTED TO A LOCALDATE WHEN USED BY THE PROGRAM.&#10;&#10;CHANGE LOG:&#10;-TABLE-VIEW UPDATES WHEN A DATA IS ADDED TO THE DATABASE &#10;-THE ASSIGNMENTS AND DESCRIPTION TABLE DATA PK CAN BE TRACKED WHEN DATA IS SUBMITTED TO APPLICATION&#10;-OBSERVABLE LIST IS NOW STATIC SO IT CAN BE EDITED IN THE CONTROLLERS CLASS&#10;&#10;The functionality of the DELETE AND MODIFY BUTTON HAVE NOT BEEN STARTED YET." />
     <MESSAGE value="CHANGE LOG:&#10;-USER SERVICE CLASS ALLOWS USERS TO BE ADDED TO THE DATABASE BUT DOES NOT LINK ASSIGNMENTS TO USER DATABASE YET&#10;-ERROR REPORTER HAS BEEN ADDED TO GUI&#10;-NEW METHODS ADDED TO ASSIGNMENTS STAGE AND STATIC VARIABLES&#10;&#10;TABLES NOT ABLE TO ADD DATA YET ARE:&#10;-NOTES TABLE&#10;-ASSIGNMENTS TABLE&#10;&#10;The functionality of the DELETE AND MODIFY BUTTON HAVE NOT BEEN STARTED YET.&#10;-MODIFY BUTTON FEATURES NEED TO BE IMPLEMENTED&#10;-DELETE BUTTON NEEDS TO BE IMPLEMENTED&#10;-NOTES SERVICE NEEDS TO BE ADDED" />
-    <option name="LAST_COMMIT_MESSAGE" value="CHANGE LOG:&#10;-USER SERVICE CLASS ALLOWS USERS TO BE ADDED TO THE DATABASE BUT DOES NOT LINK ASSIGNMENTS TO USER DATABASE YET&#10;-ERROR REPORTER HAS BEEN ADDED TO GUI&#10;-NEW METHODS ADDED TO ASSIGNMENTS STAGE AND STATIC VARIABLES&#10;&#10;TABLES NOT ABLE TO ADD DATA YET ARE:&#10;-NOTES TABLE&#10;-ASSIGNMENTS TABLE&#10;&#10;The functionality of the DELETE AND MODIFY BUTTON HAVE NOT BEEN STARTED YET.&#10;-MODIFY BUTTON FEATURES NEED TO BE IMPLEMENTED&#10;-DELETE BUTTON NEEDS TO BE IMPLEMENTED&#10;-NOTES SERVICE NEEDS TO BE ADDED" />
+    <MESSAGE value="CHANGE LOG:&#10;-USER-SERVICE NOW HAS SELECTALL METHOD&#10;-ASSIGNMENT-SERVICE CAN SELECT ITEMS FROM A SPECIFIC USER *NOT TESTED YET*&#10;-GUI CHANGES: LISTVIEW ADDED TO USER SCENE IN ASSIGNMENTS STAGE, HBOX USER SCENE, NEW BUTTON IN USER SCENE&#10;-METHOD TO LOAD USER INFO INTO LISTVIEW MADE *NOT WORKING*&#10;-ADD-USER METHOD HAS BEEN INITIALISED BUT NOT YET CREATED&#10;&#10;&#10;The FUNCTIONALITY of the DELETE AND MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE." />
+    <MESSAGE value="CHANGE LOG:&#10;-TABLE-VIEW SELECTS SPECIFIC USERS ASSIGNMENTS&#10;-ADD BUTTON WORKS PERFECTLY&#10;-DELETE BUTTON WORKS PERFECTLY&#10;-MODIFY BUTTON SERVICE METHOD NEEDED IN ASSIGNMENTSSERVICE CLASS&#10;&#10;&#10;The FUNCTIONALITY of the MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE.&#10;FUNCTIONALITY OF ADD AND REMOVE NOTES SCENE DOES NOT WORK YET" />
+    <option name="LAST_COMMIT_MESSAGE" value="CHANGE LOG:&#10;-TABLE-VIEW SELECTS SPECIFIC USERS ASSIGNMENTS&#10;-ADD BUTTON WORKS PERFECTLY&#10;-DELETE BUTTON WORKS PERFECTLY&#10;-MODIFY BUTTON SERVICE METHOD NEEDED IN ASSIGNMENTSSERVICE CLASS&#10;&#10;&#10;The FUNCTIONALITY of the MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE.&#10;FUNCTIONALITY OF ADD AND REMOVE NOTES SCENE DOES NOT WORK YET" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1069,20 +1045,7 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Models/Notes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/UserView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/UserView.java" />
     <entry file="file://$PROJECT_DIR$/src/Models/Classroom.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1101,9 +1064,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1121,9 +1081,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1142,13 +1099,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/UserView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/UserView.java" />
     <entry file="file://$PROJECT_DIR$/src/Models/Classroom.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1177,9 +1128,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="24" column="32" lean-forward="true" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1197,9 +1145,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="27" column="41" lean-forward="true" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1217,9 +1162,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1237,9 +1179,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
           <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1285,13 +1224,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Models/NotesService.java" />
-    <entry file="file://$PROJECT_DIR$/src/Models/Notes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Models/AssignmentsTableService.java" />
     <entry file="file://$PROJECT_DIR$/src/Models/IDstorage.txt" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/jre/lib/rt.jar!/java/time/format/DateTimeFormatter.class" />
@@ -1305,9 +1237,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1315,7 +1244,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1207">
           <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1331,104 +1259,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/UserView.java">
+    <entry file="file://$PROJECT_DIR$/src/Models/UserView.java" />
+    <entry file="file://$PROJECT_DIR$/src/Models/Notes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="67" column="18" lean-forward="false" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
+        <state relative-caret-position="578">
+          <caret line="48" column="13" lean-forward="false" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding>
-            <element signature="e#725#726#0" expanded="true" />
-            <element signature="e#750#751#0" expanded="true" />
-            <element signature="e#783#784#0" expanded="true" />
-            <element signature="e#811#812#0" expanded="true" />
-            <element signature="e#847#848#0" expanded="true" />
-            <element signature="e#885#886#0" expanded="true" />
-            <element signature="e#940#941#0" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
-            <element signature="e#1022#1023#0" expanded="true" />
-            <element signature="e#1067#1068#0" expanded="true" />
-            <element signature="e#1102#1103#0" expanded="true" />
-            <element signature="e#1139#1140#0" expanded="true" />
-            <element signature="e#1193#1194#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
-            <element signature="e#1272#1273#0" expanded="true" />
-            <element signature="e#1315#1316#0" expanded="true" />
-            <element signature="e#1348#1349#0" expanded="true" />
-            <element signature="e#1380#1381#0" expanded="true" />
-            <element signature="e#1434#1435#0" expanded="true" />
-            <element signature="e#1460#1461#0" expanded="true" />
-            <element signature="e#1501#1502#0" expanded="true" />
-            <element signature="e#1534#1535#0" expanded="true" />
+            <element signature="e#395#396#0" expanded="true" />
+            <element signature="e#420#421#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/javafx-src.zip!/com/sun/javafx/tk/quantum/GlassViewEventHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="379" column="0" lean-forward="false" selection-start-line="379" selection-start-column="0" selection-end-line="379" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Models/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state relative-caret-position="850">
+          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/AssignmentsView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="15" lean-forward="true" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/AssignmentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="77" column="111" lean-forward="false" selection-start-line="77" selection-start-column="111" selection-end-line="77" selection-end-column="111" />
+          <folding>
+            <marker date="1511964748508" expanded="true" signature="3030:3223" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Models/Assignments.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/AssignmentsView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1510">
-          <caret line="141" column="18" lean-forward="false" selection-start-line="141" selection-start-column="18" selection-end-line="141" selection-end-column="18" />
-          <folding>
-            <element signature="e#1880#1881#0" expanded="true" />
-            <element signature="e#1915#1916#0" expanded="true" />
-            <element signature="e#1968#1969#0" expanded="true" />
-            <element signature="e#2016#2017#0" expanded="true" />
-            <element signature="e#2053#2054#0" expanded="true" />
-            <element signature="e#2089#2090#0" expanded="true" />
-            <element signature="e#2144#2145#0" expanded="true" />
-            <element signature="e#2194#2195#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="24" lean-forward="false" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-          <folding>
-            <element signature="e#420#421#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/AssignmentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controllers/MainControllers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="46" column="31" lean-forward="true" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="31" />
+        <state relative-caret-position="238">
+          <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Models/AssignmentsStage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="65" column="16" lean-forward="true" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
+        <state relative-caret-position="302">
+          <caret line="182" column="37" lean-forward="true" selection-start-line="182" selection-start-column="37" selection-end-line="182" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controllers/MainControllers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#451#452#0" expanded="true" />
           </folding>
         </state>
       </provider>

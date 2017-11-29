@@ -15,10 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import jdk.nashorn.internal.ir.Assignment;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -29,6 +27,8 @@ import java.util.Optional;
         private Button modify;
         private Button userSceneButton;
         private Button AssignmentSceneButton;
+        private Button User;
+        private Button removeUser;
 
         private DatePicker deadline;
         private TextField teacherName;
@@ -38,16 +38,17 @@ import java.util.Optional;
         private TextField quantity;
         private TextField format;
         private TextArea errorReporter;
-        private ListView userListView;
+        private ListView<User> userListView;
 
         private DatePicker DOB;
         private TextField userName;
         private TextField lastName;
 
         private MainControllers mainControllers;
-        private static AssignmentsView enteredData;
+        public static AssignmentsView enteredData;
         private static ObservableList<AssignmentsView> tableViewData = FXCollections.observableArrayList();
-        public static UserView userViewInfo;
+        public static ObservableList<User> userListViewData = FXCollections.observableArrayList();
+        public static User userData;
 
         public static void main(String[] args) {
             launch(args);
@@ -55,6 +56,7 @@ import java.util.Optional;
 
         @Override
         public void start(Stage stage) {
+            mainControllers = new MainControllers();
             TableView<AssignmentsView> tableView = new TableView();
 
             add = new Button("Add");
@@ -64,6 +66,9 @@ import java.util.Optional;
             modify = new Button("Modify");
             userSceneButton = new Button("UserView");
             AssignmentSceneButton = new Button("Assignments");
+            User = new Button("Use");
+            removeUser = new Button("Remove");
+
 
             DOB = new DatePicker();
             DOB.setPromptText("Enter DOB");
@@ -91,9 +96,13 @@ import java.util.Optional;
             errorReporter.setEditable(false);
             errorReporter.setStyle("-fx-font-size: 20");
             userListView = new ListView();
+            userListView.setMinWidth(500);
+
+            userListView.setItems(userListViewData);
 
 
             HBox userSceneHBox = new HBox();
+            HBox userSceneButtonsHBox = new HBox();
 
             HBox assignmentSceneHBox = new HBox();
             assignmentSceneHBox.getChildren().addAll(add, remove, modify, userSceneButton);
@@ -103,7 +112,9 @@ import java.util.Optional;
             assignmentSceneVBox.setSpacing(2);
 
             VBox userSceneVBOX = new VBox();
-            userSceneVBOX.getChildren().addAll(userName,lastName, DOB, AssignmentSceneButton, addUser);
+            userSceneButtonsHBox.getChildren().addAll(AssignmentSceneButton, addUser, User, removeUser);
+            userSceneButtonsHBox.setSpacing(10);
+            userSceneVBOX.getChildren().addAll(userName,lastName, DOB, userSceneButtonsHBox);
             userSceneHBox.getChildren().addAll(userSceneVBOX, userListView);
             userSceneVBOX.setSpacing(10);
             userSceneHBox.setSpacing(10);
@@ -114,13 +125,11 @@ import java.util.Optional;
             assignmentSceneHBox.setSpacing(10);
 
             Scene assignmentScene = new Scene(assignmentSceneVBox, 1000, 830);
-            Scene userScene = new Scene(userSceneHBox, 300, 180);
+            Scene userScene = new Scene(userSceneHBox, 800, 200);
             stage.setTitle("School planner");
 
             Image icon = new Image(getClass().getResourceAsStream("/Resources/school_planner_icon.png"));
             stage.getIcons().add(icon);
-
-            mainControllers = new MainControllers();
 
             //TABLE COLUMNS
 
@@ -163,14 +172,27 @@ import java.util.Optional;
             //Button--------------------------------------------------------------------------------------------------
 
             add.setOnAction(e -> {
-                getUserInfo();
-                writeEnteredData();
+                errorReporter.clear();
+                getAssignmentData();
                 mainControllers.addAssignment();
             });
-            remove.setOnAction(e -> System.out.println("Remove feature has not been implemented"));
-            modify.setOnAction(e -> System.out.println("Modifying feature has not been implemented"));
+            User.setOnAction(e -> {userData = userListView.getSelectionModel().getSelectedItem();
+                mainControllers.updateAssignmentsViewTableView();
+            });
+            remove.setOnAction(e -> mainControllers.deleteAssignment(tableView.getSelectionModel().getSelectedItem()));
+            modify.setOnAction(e -> {
+                getAssignmentData();
+                mainControllers.modifyAssignment();
+
+            });
             userSceneButton.setOnAction(e -> stage.setScene(userScene));
             AssignmentSceneButton.setOnAction(e -> stage.setScene(assignmentScene));
+            addUser.setOnAction(e ->
+            {
+                getUserInfo();
+                mainControllers.addUser();
+                this.userName = null;
+            });
 
             tableView.setMinHeight(470);
             //---------------------------------------------------------------------------------------------------------------------
@@ -178,8 +200,7 @@ import java.util.Optional;
 
             //---------------------------------------------------------------------------------------------------------------------
 
-            mainControllers.updateAssignmentsViewTableView();
-            System.out.println(tableViewData.size());
+            mainControllers.updateUserListView();
             closeConfirmation(stage);
             stage.setScene(assignmentScene);
             stage.show();
@@ -187,19 +208,22 @@ import java.util.Optional;
         }
 
         public void getUserInfo() {
-            String firstName = userName.getText();
-            String lastName = this.lastName.getText();
-            LocalDate DOB = this.DOB.getValue();
+            try {
+                String firstName = userName.getText();
+                String lastName = this.lastName.getText();
+                LocalDate DOB = this.DOB.getValue();
 
-            if (firstName == null || lastName == null || DOB == null) {
-                errorReporter.setText("User info has not been filled in correctly" + "\n");
-                userViewInfo = null;
-            } else {
-                userViewInfo = new UserView(0,firstName, lastName, DOB);
+                if (firstName == null || lastName == null || DOB == null) {
+                    errorReporter.setText("User info has not been filled in correctly" + "\n");
+                    userData = null;
+                } else {
+                    userData = new User(0, firstName, lastName, DOB);
+                }
+            }catch (NullPointerException e){
             }
         }
 
-        public void writeEnteredData(){
+        public void getAssignmentData(){
             try {
                 String classroom = this.className.getText();
                 String description = this.description.getText();
@@ -272,10 +296,6 @@ import java.util.Optional;
             return format;
         }
 
-        public static AssignmentsView getUserEnteredData(){
-            AssignmentsView enteredDataCopy = enteredData;
-            return enteredDataCopy;
-        }
         public static ObservableList getTableViewData(){
             return tableViewData;
         }

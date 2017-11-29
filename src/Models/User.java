@@ -46,4 +46,13 @@ public class User {
     public void setDOB(LocalDate DOB) {
         this.DOB = DOB;
     }
+
+    @Override
+    public String toString() {
+        return  "id=" + getId() +
+                ", firstName='" + getFirstName() + '\'' +
+                ", lastName='" + getLastName() + '\'' +
+                ", DOB=" + getDOB() +
+                '}';
+    }
 }

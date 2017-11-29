@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserService {
 
-    public static void selectAll(List<UserView> targetList, DatabaseConnection database) {
+    public static void selectAll(List<User> targetList, DatabaseConnection database) {
 
 
 
@@ -26,7 +26,7 @@ public class UserService {
                     while (results1.next()) {
 
                         LocalDate dob = LocalDate.parse(results1.getString("DOB"), formatter);
-                        targetList.add(new UserView(results1.getInt("UserID"), results1.getString("Firstname"), results1.getString("Lastname"), dob));
+                        targetList.add(new User(results1.getInt("UserID"), results1.getString("Firstname"), results1.getString("Lastname"), dob));
                     }
                 }
             }

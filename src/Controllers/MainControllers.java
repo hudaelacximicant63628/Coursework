@@ -4,94 +4,84 @@ import Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.security.cert.CertificateNotYetValidException;
 import java.util.ArrayList;
 
 
 public class MainControllers {
-    private ArrayList<AssignmentsView> assignmentsViewList;
-    private AssignmentsStage assignmentsStage;
 
-    private static ArrayList<Integer> descriptionIdTracker = new ArrayList<>();
-    private static ArrayList<Integer> assignmentIdTracker = new ArrayList<>();
-    private static ArrayList<Integer> userIdTracker = new ArrayList<>();
     private static User saveUserToDatabase;
 
-
-    private ArrayList<AssignmentsView> targetList;
     public DatabaseConnection databaseConnection ;
 
     public MainControllers() {
-        this.assignmentsViewList = new ArrayList<>();
         this.databaseConnection = new DatabaseConnection("coursework.db");
     }
 
+    public void addAssignment() {
 
+        AssignmentsView assignmentDataEntered = AssignmentsStage.enteredData;
 
-    public boolean addAssignment() {
+        User userDataEntered = AssignmentsStage.userData;
 
-        AssignmentsView data = AssignmentsStage.getUserEnteredData();
+        if (userDataEntered != null || assignmentDataEntered != null) {
 
-        UserView userDataEntered = AssignmentsStage.userViewInfo;
-
-        if (userDataEntered != null) {
-
-            saveUserToDatabase = new User(0,userDataEntered.getFirstName(), userDataEntered.getLastname(), userDataEntered.getDOB());
-            UserService.save(saveUserToDatabase, databaseConnection);
+            saveUserToDatabase = userDataEntered;
 
             //adds to database
-            Description saveDescriptionToDatabase = new Description(0, data.getDescription(), data.getTitle(), data.getQuantity(), data.getFormat());
-            Classroom saveClassroomToDatabase = new Classroom(data.getClassroom(), data.getTeacher());
-            Assignments saveAssignmentToDatabase = new Assignments(0, saveClassroomToDatabase.getClassroom(), saveDescriptionToDatabase.getDescriptionID(), data.getDeadline());
+            Description saveDescriptionToDatabase = new Description(0, assignmentDataEntered.getDescription(), assignmentDataEntered.getTitle(), assignmentDataEntered.getQuantity(), assignmentDataEntered.getFormat());
+            Classroom saveClassroomToDatabase = new Classroom(assignmentDataEntered.getClassroom(), assignmentDataEntered.getTeacher());
+            Assignments saveAssignmentToDatabase = new Assignments(0, saveClassroomToDatabase.getClassroom(), saveDescriptionToDatabase.getDescriptionID(), assignmentDataEntered.getDeadline());
 
             AssignmentService.save(saveDescriptionToDatabase, saveClassroomToDatabase, databaseConnection);
             AssignmentService.saveToAssignments(saveDescriptionToDatabase.getDescriptionID(), saveClassroomToDatabase.getClassroom(), saveAssignmentToDatabase, databaseConnection);
 
             AssignmentService.saveToPlanner(saveUserToDatabase, saveAssignmentToDatabase, databaseConnection);
 
-
-
-
-
-
-            //TRACKS THE PK OF THE DESCRIPTION AND ASSIGNMENT TABLE
-//            descriptionIdTracker.add(saveDescriptionToDatabase.getDescriptionID());
-//            assignmentIdTracker.add(saveAssignmentToDatabase.getAssignmentID());
-//            userIdTracker.add(saveUserToDatabase.getId());
-//
-//            for (int i : descriptionIdTracker) {
-//                System.out.println(i);
-//            }
-//            for (int j : assignmentIdTracker) {
-//                System.out.println(j);
-//            }
-//            for(int m : userIdTracker){
-//                System.out.println(m);
-//            }
-
-
             updateAssignmentsViewTableView();
 
-            return true;
-
         }
-        return false;
+    }
+    public void deleteAssignment(AssignmentsView assignmentsView){
+        Assignments assignments = new Assignments(assignmentsView.getAssignmentID(), assignmentsView.getClassroom(), assignmentsView.getDescriptionID(), assignmentsView.getDeadline());
+        Description description = new Description(assignmentsView.getDescriptionID(), assignmentsView.getDescription(), assignmentsView.getTitle(), assignmentsView.getQuantity(), assignmentsView.getFormat());
+        Classroom classroom = new Classroom(assignmentsView.getClassroom(), assignmentsView.getTeacher());
+
+        AssignmentService.delete(AssignmentsStage.userData, assignments, description, classroom, databaseConnection);
+        updateAssignmentsViewTableView();
     }
 
-    public void addUser(){
+    public void modifyAssignment(){
+        if(AssignmentsStage.enteredData != null) {
+            AssignmentsView enteredData = AssignmentsStage.enteredData;
+            Assignments assignments = new Assignments(enteredData.getAssignmentID(), enteredData.getClassroom(), enteredData.getDescriptionID(), enteredData.getDeadline());
+            Description description = new Description(enteredData.getDescriptionID(), enteredData.getDescription(), enteredData.getTitle(), assignmentsView.getQuantity(), enteredData.getFormat());
+            Classroom classroom = new Classroom(enteredData.getClassroom(), enteredData.getTeacher());
 
+        }
+
+
+    }
+
+
+
+
+    public void addUser(){
+        AssignmentsStage.userListViewData.clear();
+        if (AssignmentsStage.userData != null) {
+            UserService.save(AssignmentsStage.userData, databaseConnection);
+            updateUserListView();
+        }
     }
 
     public void updateAssignmentsViewTableView(){
-        targetList= new ArrayList<>();
         AssignmentsStage.getTableViewData().clear();
-        AssignmentService.selectAll(AssignmentsStage.getTableViewData(), databaseConnection);
+        AssignmentService.selectAll(AssignmentsStage.userData,AssignmentsStage.getTableViewData(), databaseConnection);
+    }
+    public void updateUserListView(){
+        UserService.selectAll(AssignmentsStage.userListViewData, databaseConnection);
     }
 
-    public ObservableList loadUserInfo(){
-        ObservableList<UserView> userView = FXCollections.observableArrayList();
-        UserService.selectAll(userView, databaseConnection);
-        return userView;
-    }
 
 
 }

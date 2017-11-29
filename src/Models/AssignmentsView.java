@@ -31,15 +31,14 @@ public class AssignmentsView {
         this.descriptionID = descriptionID;
 
     }
-    public AssignmentsView(String teacher, String classroom, String description, String title, int quantity, String format, LocalDate deadline) {
-        this.description = new SimpleStringProperty(description);
+    public AssignmentsView(String teacher, String classroom, String descriptionID, String title, int quantity, String format, LocalDate deadline) {
+        this.description = new SimpleStringProperty(descriptionID);
         this.teacher = teacher;
         this.title = new SimpleStringProperty(title);
         this.quantity = new SimpleIntegerProperty(quantity);
         this.format = new SimpleStringProperty(format);
         this.classroom = new SimpleStringProperty(classroom);
         this.deadline = new SimpleObjectProperty<>(deadline);
-
     }
 
     public int getAssignmentID() {

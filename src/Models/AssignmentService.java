@@ -16,36 +16,6 @@ import java.util.List;
 
 public class AssignmentService {
     //used for assignmentsview table-view
-    public static void selectAll(List<AssignmentsView> targetList, DatabaseConnection database) {
-
-
-
-        PreparedStatement statement1 = database.newStatement("SELECT Class FROM Classroom ORDER BY Class");
-        PreparedStatement statement2 = database.newStatement("SELECT DescriptionID, Quantity, Format, Title, Description FROM Description ORDER BY DescriptionID");
-        PreparedStatement statement3 = database.newStatement("SELECT AssignmentID, Deadline FROM Assignments ORDER BY AssignmentID");
-
-        try {
-            if (statement1 != null && statement2 != null && statement3 != null) {
-
-                ResultSet results1 = database.runQuery(statement1);
-                ResultSet results2 = database.runQuery(statement2);
-                ResultSet results3 = database.runQuery(statement3);
-
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-                if (results1 != null && results2 != null && results3 != null) {
-                    while (results1.next() && results2.next() && results3.next()) {
-
-                        LocalDate deadline = LocalDate.parse(results3.getString("Deadline"), formatter);
-                        targetList.add(new AssignmentsView(results3.getInt("AssignmentID"), results2.getInt("DescriptionID"),results1.getString("Class"), results2.getString("Description"), results2.getString("Title"), results2.getInt("Quantity"), results2.getString("Format"), deadline));
-                    }
-                }
-            }
-
-        } catch (SQLException resultsException) {
-            System.out.println("Database select all error: " + resultsException.getMessage());
-        }
-    }
 
     public static void selectAll(User user, List<AssignmentsView> targetList, DatabaseConnection database) {
 
@@ -58,6 +28,7 @@ public class AssignmentService {
         String format = null;
         String title = null;
         String description = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         PreparedStatement statement = database.newStatement(String.format("SELECT AssignmentID FROM SchoolPlanner WHERE UserID = %2d", userId));
 
@@ -70,35 +41,61 @@ public class AssignmentService {
                 if (results1 != null) {
                     while (results1.next()) {
                         assignmentID = results1.getInt("AssignmentID");
-                    }
+
                     PreparedStatement statement2 = database.newStatement(String.format("SELECT Class, DescriptionID, Deadline FROM Assignments WHERE AssignmentID = %2d", assignmentID));
-                    if(database.runQuery(statement2) != null){
+                    if(database.runQuery(statement2) != null) {
                         ResultSet results2 = database.runQuery(statement2);
-                        while(results2.next()){
-                            deadline = LocalDate.parse(results2.getString("Deadline"));
+                        while (results2.next()) {
+                            deadline = LocalDate.parse(results2.getString("Deadline"), formatter);
                             descriptionID = results2.getInt("DescriptionID");
                             classroom = results2.getString("Class");
-                        }
-                        PreparedStatement statement3 = database.newStatement(String.format("SELECT Quantity, Format, Title, Description FROM Description WHERE DescriptionID = %2d", descriptionID));
-                        if(database.runQuery(statement3) != null){
-                            ResultSet results3 = database.runQuery(statement3);
-                            while (results3.next()){
-                                quantity = results3.getInt("Quantity");
-                                format = results3.getString("Format");
-                                title = results3.getString("Title");
-                                description = results3.getString("Description");
+
+                            PreparedStatement statement3 = database.newStatement(String.format("SELECT Quantity, Format, Title, Description FROM Description WHERE DescriptionID = %2d", descriptionID));
+                            if (database.runQuery(statement3) != null) {
+                                ResultSet results3 = database.runQuery(statement3);
+                                while (results3.next()) {
+                                    quantity = results3.getInt("Quantity");
+                                    format = results3.getString("Format");
+                                    title = results3.getString("Title");
+                                    description = results3.getString("Description");
+                                }
                             }
-                            targetList.add(new AssignmentsView(assignmentID, descriptionID, classroom, description, title, quantity, format, deadline));
                         }
-
-
                     }
-
+                        targetList.add(new AssignmentsView(assignmentID, descriptionID, classroom, description, title, quantity, format, deadline));
+                    }
 
                 }
             }
         } catch (SQLException resultsException) {
             System.out.println("Database select all error: " + resultsException.getMessage());
+        }
+    }
+
+    public static void delete(User user, Assignments assignments, Description description, Classroom classroom, DatabaseConnection database){
+
+
+            PreparedStatement statement = database.newStatement("DELETE FROM SchoolPlanner WHERE UserID = ? AND AssignmentID = ?");
+            PreparedStatement statement2 = database.newStatement("DELETE FROM Assignments WHERE AssignmentID = ?");
+            PreparedStatement statement3 = database.newStatement("DELETE FROM Classroom WHERE Class = ?");
+            PreparedStatement statement4 = database.newStatement("DELETE FROM Description where DescriptionID = ?");
+
+
+            try{
+                if (statement != null && statement2 != null && statement3 != null && statement4 != null) {
+                    statement.setInt(1, user.getId());
+                    statement.setInt(2, assignments.getAssignmentID());
+                    statement2.setInt(1, assignments.getAssignmentID());
+                    statement3.setString(1, classroom.getClassroom());
+                    statement4.setInt(1, description.getDescriptionID());
+                    database.executeUpdate(statement);
+                    database.executeUpdate(statement2);
+                    database.executeUpdate(statement3);
+                    database.executeUpdate(statement4);
+                }
+
+            } catch (SQLException resultsException) {
+                System.out.println("Database select all error: " + resultsException.getMessage());
         }
     }
 

@@ -9,10 +9,10 @@ public class Assignments {
     private int descriptionID;
     private LocalDate deadline;
 
-    public Assignments(int assignmentID, String classroom, int description, LocalDate deadline) {
+    public Assignments(int assignmentID, String classroom, int descriptionID, LocalDate deadline) {
         this.assignmentID = assignmentID;
         this.classroom = classroom;
-        this.descriptionID = description;
+        this.descriptionID = descriptionID;
         this.deadline = deadline; {
         };
     }
