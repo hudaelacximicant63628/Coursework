@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="90e450e5-9eaa-4902-993c-2ecdc781d021" name="Default" comment="CHANGE LOG:&#10;-TABLE-VIEW SELECTS SPECIFIC USERS ASSIGNMENTS&#10;-ADD BUTTON WORKS PERFECTLY&#10;-DELETE BUTTON WORKS PERFECTLY&#10;-MODIFY BUTTON SERVICE METHOD NEEDED IN ASSIGNMENTSSERVICE CLASS&#10;&#10;&#10;The FUNCTIONALITY of the MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE.&#10;FUNCTIONALITY OF ADD AND REMOVE NOTES SCENE DOES NOT WORK YET">
+    <list default="true" id="90e450e5-9eaa-4902-993c-2ecdc781d021" name="Default" comment="CHANGE LOG:&#10;-TABLE-VIEW SELECTS SPECIFIC USERS ASSIGNMENTS&#10;-ADD BUTTON WORKS PERFECTLY&#10;-DELETE BUTTON WORKS PERFECTLY&#10;-MODIFY BUTTON WORKS PERFECTLY&#10;&#10;IMPROVEMENTS:&#10;-VALIDATION FOR THE DATES &#10;-COMPLETE NOTES STAGE AND SCENE&#10;-REFINE CODE A BIT MORE">
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Models/AssignmentsViewService.java" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Models/UserView.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/coursework.db" afterPath="$PROJECT_DIR$/coursework.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controllers/MainControllers.java" afterPath="$PROJECT_DIR$/src/Controllers/MainControllers.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/AssignmentService.java" afterPath="$PROJECT_DIR$/src/Models/AssignmentService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/Assignments.java" afterPath="$PROJECT_DIR$/src/Models/Assignments.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/AssignmentsStage.java" afterPath="$PROJECT_DIR$/src/Models/AssignmentsStage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/AssignmentsView.java" afterPath="$PROJECT_DIR$/src/Models/AssignmentsView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/Notes.java" afterPath="$PROJECT_DIR$/src/Models/Notes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/User.java" afterPath="$PROJECT_DIR$/src/Models/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/UserService.java" afterPath="$PROJECT_DIR$/src/Models/UserService.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +23,8 @@
       <file leaf-file-name="AssignmentsStage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Models/AssignmentsStage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="182" column="37" lean-forward="true" selection-start-line="182" selection-start-column="37" selection-end-line="182" selection-end-column="37" />
+            <state relative-caret-position="3808">
+              <caret line="241" column="0" lean-forward="false" selection-start-line="241" selection-start-column="0" selection-end-line="241" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -40,11 +35,23 @@
       <file leaf-file-name="MainControllers.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controllers/MainControllers.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="598">
+              <caret line="75" column="9" lean-forward="false" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
               <folding>
-                <element signature="e#370#371#0" expanded="true" />
-                <element signature="e#451#452#0" expanded="true" />
+                <marker date="1512137312432" expanded="true" signature="3760:3895" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssignmentService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Models/AssignmentService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2448">
+              <caret line="144" column="0" lean-forward="false" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+              <folding>
+                <marker date="1512136711924" expanded="true" signature="11527:12030" ph="{...}" />
+                <marker date="1512136711924" expanded="true" signature="12134:12612" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -53,21 +60,9 @@
       <file leaf-file-name="Assignments.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Models/Assignments.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+            <state relative-caret-position="476">
+              <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AssignmentService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Models/AssignmentService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="77" column="111" lean-forward="false" selection-start-line="77" selection-start-column="111" selection-end-line="77" selection-end-column="111" />
-              <folding>
-                <marker date="1511964748508" expanded="true" signature="3030:3223" ph="{...}" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -76,7 +71,7 @@
         <entry file="file://$PROJECT_DIR$/src/Models/AssignmentsView.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="15" lean-forward="true" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+              <caret line="0" column="15" lean-forward="false" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -85,11 +80,9 @@
       <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Models/UserService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
+            <state relative-caret-position="1173">
               <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -122,10 +115,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="425">
               <caret line="35" column="5" lean-forward="false" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-              <folding>
-                <element signature="e#856#857#0" expanded="true" />
-                <element signature="e#884#885#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -188,8 +178,8 @@
         <option value="$PROJECT_DIR$/src/Models/Notes.java" />
         <option value="$PROJECT_DIR$/src/Models/User.java" />
         <option value="$PROJECT_DIR$/src/Models/AssignmentsView.java" />
-        <option value="$PROJECT_DIR$/src/Models/AssignmentService.java" />
         <option value="$PROJECT_DIR$/src/Models/Assignments.java" />
+        <option value="$PROJECT_DIR$/src/Models/AssignmentService.java" />
         <option value="$PROJECT_DIR$/src/Models/AssignmentsStage.java" />
         <option value="$PROJECT_DIR$/src/Controllers/MainControllers.java" />
       </list>
@@ -233,28 +223,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="CourseworkHrithik" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CourseworkHrithik" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CourseworkHrithik" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CourseworkHrithik" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CourseworkHrithik" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CourseworkHrithik" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Models" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="AndroidView" />
@@ -264,7 +233,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
-    <property name="last_opened_file_path" value="U:/IntelliJ/Coursework testing" />
+    <property name="last_opened_file_path" value="U:/Git/bin/git.exe" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -790,7 +759,9 @@
       <workItem from="1511520015015" duration="5366000" />
       <workItem from="1511874511846" duration="5367000" />
       <workItem from="1511882147113" duration="559000" />
-      <workItem from="1511960910357" duration="4885000" />
+      <workItem from="1511960910357" duration="5051000" />
+      <workItem from="1512135354172" duration="2506000" />
+      <workItem from="1512377995350" duration="7000" />
     </task>
     <task id="LOCAL-00001" summary="kk">
       <created>1507283743282</created>
@@ -911,11 +882,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511525377618</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="CHANGE LOG:&#10;-TABLE-VIEW SELECTS SPECIFIC USERS ASSIGNMENTS&#10;-ADD BUTTON WORKS PERFECTLY&#10;-DELETE BUTTON WORKS PERFECTLY&#10;-MODIFY BUTTON SERVICE METHOD NEEDED IN ASSIGNMENTS-SERVICE CLASS&#10;&#10;&#10;The FUNCTIONALITY of the MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE.&#10;FUNCTIONALITY OF ADD AND REMOVE NOTES SCENE DOES NOT WORK YET">
+      <created>1511965923320</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1511965923320</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90834000" />
+    <option name="totallyTimeSpent" value="93513000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1300" height="1044" extended-state="0" />
@@ -923,31 +901,31 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3251073" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3445946" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35797253" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3583691" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18691589" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39915523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3412162" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32725322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -967,18 +945,18 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39915523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277027" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3412162" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3445946" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35797253" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2140625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284055" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32725322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
@@ -1032,7 +1010,9 @@
     <MESSAGE value="CHANGE LOG:&#10;-USER SERVICE CLASS ALLOWS USERS TO BE ADDED TO THE DATABASE BUT DOES NOT LINK ASSIGNMENTS TO USER DATABASE YET&#10;-ERROR REPORTER HAS BEEN ADDED TO GUI&#10;-NEW METHODS ADDED TO ASSIGNMENTS STAGE AND STATIC VARIABLES&#10;&#10;TABLES NOT ABLE TO ADD DATA YET ARE:&#10;-NOTES TABLE&#10;-ASSIGNMENTS TABLE&#10;&#10;The functionality of the DELETE AND MODIFY BUTTON HAVE NOT BEEN STARTED YET.&#10;-MODIFY BUTTON FEATURES NEED TO BE IMPLEMENTED&#10;-DELETE BUTTON NEEDS TO BE IMPLEMENTED&#10;-NOTES SERVICE NEEDS TO BE ADDED" />
     <MESSAGE value="CHANGE LOG:&#10;-USER-SERVICE NOW HAS SELECTALL METHOD&#10;-ASSIGNMENT-SERVICE CAN SELECT ITEMS FROM A SPECIFIC USER *NOT TESTED YET*&#10;-GUI CHANGES: LISTVIEW ADDED TO USER SCENE IN ASSIGNMENTS STAGE, HBOX USER SCENE, NEW BUTTON IN USER SCENE&#10;-METHOD TO LOAD USER INFO INTO LISTVIEW MADE *NOT WORKING*&#10;-ADD-USER METHOD HAS BEEN INITIALISED BUT NOT YET CREATED&#10;&#10;&#10;The FUNCTIONALITY of the DELETE AND MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE." />
     <MESSAGE value="CHANGE LOG:&#10;-TABLE-VIEW SELECTS SPECIFIC USERS ASSIGNMENTS&#10;-ADD BUTTON WORKS PERFECTLY&#10;-DELETE BUTTON WORKS PERFECTLY&#10;-MODIFY BUTTON SERVICE METHOD NEEDED IN ASSIGNMENTSSERVICE CLASS&#10;&#10;&#10;The FUNCTIONALITY of the MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE.&#10;FUNCTIONALITY OF ADD AND REMOVE NOTES SCENE DOES NOT WORK YET" />
-    <option name="LAST_COMMIT_MESSAGE" value="CHANGE LOG:&#10;-TABLE-VIEW SELECTS SPECIFIC USERS ASSIGNMENTS&#10;-ADD BUTTON WORKS PERFECTLY&#10;-DELETE BUTTON WORKS PERFECTLY&#10;-MODIFY BUTTON SERVICE METHOD NEEDED IN ASSIGNMENTSSERVICE CLASS&#10;&#10;&#10;The FUNCTIONALITY of the MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE.&#10;FUNCTIONALITY OF ADD AND REMOVE NOTES SCENE DOES NOT WORK YET" />
+    <MESSAGE value="CHANGE LOG:&#10;-TABLE-VIEW SELECTS SPECIFIC USERS ASSIGNMENTS&#10;-ADD BUTTON WORKS PERFECTLY&#10;-DELETE BUTTON WORKS PERFECTLY&#10;-MODIFY BUTTON SERVICE METHOD NEEDED IN ASSIGNMENTS-SERVICE CLASS&#10;&#10;&#10;The FUNCTIONALITY of the MODIFY BUTTON HAVE NOT BEEN STARTED YET FOR BOTH NOTES SCENE AND ASSIGNMENT SCENE.&#10;FUNCTIONALITY OF ADD AND REMOVE NOTES SCENE DOES NOT WORK YET" />
+    <MESSAGE value="CHANGE LOG:&#10;-TABLE-VIEW SELECTS SPECIFIC USERS ASSIGNMENTS&#10;-ADD BUTTON WORKS PERFECTLY&#10;-DELETE BUTTON WORKS PERFECTLY&#10;-MODIFY BUTTON WORKS PERFECTLY&#10;&#10;IMPROVEMENTS:&#10;-VALIDATION FOR THE DATES &#10;-COMPLETE NOTES STAGE AND SCENE&#10;-REFINE CODE A BIT MORE" />
+    <option name="LAST_COMMIT_MESSAGE" value="CHANGE LOG:&#10;-TABLE-VIEW SELECTS SPECIFIC USERS ASSIGNMENTS&#10;-ADD BUTTON WORKS PERFECTLY&#10;-DELETE BUTTON WORKS PERFECTLY&#10;-MODIFY BUTTON WORKS PERFECTLY&#10;&#10;IMPROVEMENTS:&#10;-VALIDATION FOR THE DATES &#10;-COMPLETE NOTES STAGE AND SCENE&#10;-REFINE CODE A BIT MORE" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1252,10 +1232,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="35" column="5" lean-forward="false" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-          <folding>
-            <element signature="e#856#857#0" expanded="true" />
-            <element signature="e#884#885#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1288,57 +1265,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Models/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
+        <state relative-caret-position="1173">
           <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Models/AssignmentsView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="15" lean-forward="true" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/AssignmentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="77" column="111" lean-forward="false" selection-start-line="77" selection-start-column="111" selection-end-line="77" selection-end-column="111" />
-          <folding>
-            <marker date="1511964748508" expanded="true" signature="3030:3223" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/Assignments.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+          <caret line="0" column="15" lean-forward="false" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Models/AssignmentsStage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="182" column="37" lean-forward="true" selection-start-line="182" selection-start-column="37" selection-end-line="182" selection-end-column="37" />
+        <state relative-caret-position="3808">
+          <caret line="241" column="0" lean-forward="false" selection-start-line="241" selection-start-column="0" selection-end-line="241" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/Assignments.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/AssignmentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2448">
+          <caret line="144" column="0" lean-forward="false" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+          <folding>
+            <marker date="1512136711924" expanded="true" signature="11527:12030" ph="{...}" />
+            <marker date="1512136711924" expanded="true" signature="12134:12612" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controllers/MainControllers.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="598">
+          <caret line="75" column="9" lean-forward="false" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
           <folding>
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#451#452#0" expanded="true" />
+            <marker date="1512137312432" expanded="true" signature="3760:3895" ph="{...}" />
           </folding>
         </state>
       </provider>

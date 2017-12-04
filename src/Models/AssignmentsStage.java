@@ -37,7 +37,7 @@ import java.util.Optional;
         private TextField title;
         private TextField quantity;
         private TextField format;
-        private TextArea errorReporter;
+        public static TextArea errorReporter;
         private ListView<User> userListView;
 
         private DatePicker DOB;
@@ -175,6 +175,7 @@ import java.util.Optional;
                 errorReporter.clear();
                 getAssignmentData();
                 mainControllers.addAssignment();
+                clearTextFields();
             });
             User.setOnAction(e -> {userData = userListView.getSelectionModel().getSelectedItem();
                 mainControllers.updateAssignmentsViewTableView();
@@ -239,6 +240,16 @@ import java.util.Optional;
                 }
         }
 
+        public void clearTextFields(){
+            title.clear();
+            description.clear();
+            className.clear();
+            teacherName.clear();
+            quantity.clear();
+            format.clear();
+            deadline.getEditor().clear();
+        }
+
 
 
         private void closeConfirmation(Stage stage){
@@ -256,51 +267,10 @@ import java.util.Optional;
             });
         }
 
-        public DatePicker getDOB() {
-            return DOB;
-        }
 
-        public TextField getUserName() {
-            return userName;
-        }
-
-        public TextField getLastName() {
-            return lastName;
-        }
-
-        public DatePicker getDeadline() {
-            return deadline;
-        }
-
-        public TextField getTeacherName() {
-            return teacherName;
-        }
-
-        public TextField getClassName() {
-            return className;
-        }
-
-        public TextField getDescription() {
-            return description;
-        }
-
-        public TextField getTitle() {
-            return title;
-        }
-
-        public TextField getQuantity() {
-            return quantity;
-        }
-
-        public TextField getFormat() {
-            return format;
-        }
 
         public static ObservableList getTableViewData(){
             return tableViewData;
         }
-
-
-
 
     }

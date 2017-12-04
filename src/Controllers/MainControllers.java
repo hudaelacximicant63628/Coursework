@@ -51,13 +51,15 @@ public class MainControllers {
         updateAssignmentsViewTableView();
     }
 
-    public void modifyAssignment(){
-        if(AssignmentsStage.enteredData != null) {
+    public void modifyAssignment() {
+        if (AssignmentsStage.enteredData != null) {
             AssignmentsView enteredData = AssignmentsStage.enteredData;
             Assignments assignments = new Assignments(enteredData.getAssignmentID(), enteredData.getClassroom(), enteredData.getDescriptionID(), enteredData.getDeadline());
-            Description description = new Description(enteredData.getDescriptionID(), enteredData.getDescription(), enteredData.getTitle(), assignmentsView.getQuantity(), enteredData.getFormat());
+            Description description = new Description(enteredData.getDescriptionID(), enteredData.getDescription(), enteredData.getTitle(), enteredData.getQuantity(), enteredData.getFormat());
             Classroom classroom = new Classroom(enteredData.getClassroom(), enteredData.getTeacher());
 
+            AssignmentService.modifyAssignment(AssignmentsStage.userData, assignments, description, classroom, databaseConnection);
+            updateAssignmentsViewTableView();
         }
 
 
@@ -76,6 +78,7 @@ public class MainControllers {
 
     public void updateAssignmentsViewTableView(){
         AssignmentsStage.getTableViewData().clear();
+        AssignmentsStage.errorReporter.clear();
         AssignmentService.selectAll(AssignmentsStage.userData,AssignmentsStage.getTableViewData(), databaseConnection);
     }
     public void updateUserListView(){
