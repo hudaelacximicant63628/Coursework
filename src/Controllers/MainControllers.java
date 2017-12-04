@@ -66,6 +66,10 @@ public class MainControllers {
     }
 
 
+    //remove all entries made by user including itself
+    public void removeUser(){
+
+    }
 
 
     public void addUser(){
