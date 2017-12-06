@@ -4,13 +4,13 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Notes {
     private int notesID;
-    private User userID;
-    private final SimpleStringProperty notes;
+    private int userID;
+    private String notes;
 
-    public Notes(int notesID, User userID, SimpleStringProperty notes) {
+    public Notes(int notesID, int userID, String notes) {
         this.notesID = notesID;
         this.userID = userID;
-        this.notes = new SimpleStringProperty();
+        this.notes = notes;
     }
 
     public int getNotesID() {
@@ -21,24 +21,20 @@ public class Notes {
         this.notesID = notesID;
     }
 
-    public User getUserID() {
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(User userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 
     public String getNotes() {
-        return notes.get();
-    }
-
-    public SimpleStringProperty notesProperty() {
         return notes;
     }
 
     public void setNotes(String notes) {
-        this.notes.set(notes);
+        this.notes = notes;
     }
 
     @Override

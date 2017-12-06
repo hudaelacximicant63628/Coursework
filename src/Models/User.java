@@ -49,10 +49,9 @@ public class User {
 
     @Override
     public String toString() {
-        return  "id=" + getId() +
-                ", firstName='" + getFirstName() + '\'' +
-                ", lastName='" + getLastName() + '\'' +
-                ", DOB=" + getDOB() +
-                '}';
+        return  "id = " + getId() +
+                ", firstName= " + getFirstName() +
+                ", lastName= " + getLastName() +
+                ", DOB= " + getDOB();
     }
 }

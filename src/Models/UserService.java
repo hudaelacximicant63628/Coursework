@@ -67,6 +67,9 @@ public class UserService {
 
         return result;
     }
+    public static void delete(User user, Assignments assignments, Description description, Classroom classroom, DatabaseConnection database){
+
+    }
 
     public static void save(User user, DatabaseConnection database) {
 
@@ -101,4 +104,6 @@ public class UserService {
         }
 
     }
+
+
 }

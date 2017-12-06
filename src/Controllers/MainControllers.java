@@ -76,8 +76,8 @@ public class MainControllers {
         AssignmentsStage.userListViewData.clear();
         if (AssignmentsStage.userData != null) {
             UserService.save(AssignmentsStage.userData, databaseConnection);
-            updateUserListView();
         }
+        updateUserListView();
     }
 
     public void updateAssignmentsViewTableView(){
@@ -87,6 +87,11 @@ public class MainControllers {
     }
     public void updateUserListView(){
         UserService.selectAll(AssignmentsStage.userListViewData, databaseConnection);
+    }
+
+    public void updateNotesTableView(){
+        NotesStage.notesData.clear();
+        NotesService.selectAll(NotesStage.userData, NotesStage.notesData, databaseConnection);
     }
 
 

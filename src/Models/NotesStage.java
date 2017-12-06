@@ -1,5 +1,6 @@
 package Models;
 
+import Controllers.MainControllers;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -7,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,28 +19,42 @@ import java.util.Optional;
 
 public class NotesStage extends Application{
 
-    private ListView listView;
+    private ListView<User> listView;
+    public static ObservableList<Notes> notesData;
     private Button user;
     private Button notes;
+    private Button use;
+    public static User userData;
 
     @Override
     public void start(Stage stage) throws Exception {
+        MainControllers mainControllers = new MainControllers();
         stage.setTitle("Notes");
-        Image icon = new Image(getClass().getResourceAsStream("school_planner_icon.png"));
+        Image icon = new Image(getClass().getResourceAsStream("/Resources/school_planner_icon.png"));
         stage.getIcons().add(icon);
         stage.setMaxHeight(580);
         stage.setMaxWidth(1200);
 
+        notesData = FXCollections.observableArrayList();
+
 
         notes = new Button("Notes");
+        use = new Button("Use");
         listView = new ListView();
         VBox userSceneVBox = new VBox();
-        userSceneVBox.getChildren().addAll(listView, notes);
+        HBox userSceneHBox = new HBox();
+        userSceneHBox.getChildren().addAll(notes,use);
+        userSceneVBox.getChildren().addAll(listView, userSceneHBox);
         user = new Button("UserView");
 
+        ObservableList<User> userList = FXCollections.observableArrayList();
+        UserService.selectAll(userList, mainControllers.databaseConnection);
+
+        listView.setItems(userList);
 
 
-        Scene userScene = new Scene(userSceneVBox, 300, 150);
+
+        Scene userScene = new Scene(userSceneVBox, 500, 150);
 
         VBox notesStageVBox = new VBox();
 
@@ -53,15 +69,11 @@ public class NotesStage extends Application{
         note.setPrefWidth(800);
         notesStageHBox.getChildren().addAll(addNote, deleteNote,user,  note);
 
-        ObservableList<String> notesData = FXCollections.observableArrayList();
-
 
         TableView notesTableView = new TableView<>();
-
-        TableColumn<String, String> notesColumn = new TableColumn<>("Notes");
+        TableColumn notesColumn = new TableColumn<>("Notes");
         notesTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        notesColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
-
+        notesColumn.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
         notesTableView.getColumns().add(notesColumn);
         notesTableView.setPrefHeight(500);
@@ -74,7 +86,18 @@ public class NotesStage extends Application{
         Scene assignmentScene = new Scene(notesStageVBox);
 
         deleteNote.setOnAction(e -> notesData.remove(selectedItems.get(0)));
-        addNote.setOnAction(e -> notesData.add(note.getText()));
+        addNote.setOnAction(e -> {
+            if(note.getText() != null) {
+                NotesService.save(new Notes(0, userData.getId(), note.getText()), userData, mainControllers.databaseConnection);
+                mainControllers.updateNotesTableView();
+                note.clear();
+            }
+
+        });
+        use.setOnAction(e -> {
+            userData = listView.getSelectionModel().getSelectedItem();
+            mainControllers.updateNotesTableView();
+        });
 
         notes.setOnAction(e -> stage.setScene(assignmentScene));
         user.setOnAction(e -> stage.setScene(userScene));
