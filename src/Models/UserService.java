@@ -1,10 +1,12 @@
 package Models;
 
+import javax.xml.crypto.Data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -29,6 +31,96 @@ public class UserService {
                         targetList.add(new User(results1.getInt("UserID"), results1.getString("Firstname"), results1.getString("Lastname"), dob));
                     }
                 }
+            }
+
+        } catch (SQLException resultsException) {
+            System.out.println("Database select all error: " + resultsException.getMessage());
+        }
+    }
+
+    public static void selectUserRelatedData(User user, List<AssignmentsView> targetList, DatabaseConnection database) {
+
+        int userId = user.getId();
+        int assignmentID = 0;
+        int descriptionID = 0;
+        LocalDate deadline = null;
+        String classroom = null;
+        int quantity = 0;
+        String format = null;
+        String title = null;
+        String description = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        PreparedStatement statement = database.newStatement(String.format("SELECT AssignmentID FROM SchoolPlanner WHERE UserID = %2d", userId));
+
+
+        try {
+            if (statement != null) {
+
+                ResultSet results1 = database.runQuery(statement);
+
+                if (results1 != null) {
+                    while (results1.next()) {
+                        assignmentID = results1.getInt("AssignmentID");
+
+                        PreparedStatement statement2 = database.newStatement(String.format("SELECT Class, DescriptionID, Deadline FROM Assignments WHERE AssignmentID = %2d", assignmentID));
+                        if (database.runQuery(statement2) != null) {
+                            ResultSet results2 = database.runQuery(statement2);
+                            while (results2.next()) {
+                                deadline = LocalDate.parse(results2.getString("Deadline"), formatter);
+                                descriptionID = results2.getInt("DescriptionID");
+                                classroom = results2.getString("Class");
+
+                                PreparedStatement statement3 = database.newStatement(String.format("SELECT Quantity, Format, Title, Description FROM Description WHERE DescriptionID = %2d", descriptionID));
+                                if (database.runQuery(statement3) != null) {
+                                    ResultSet results3 = database.runQuery(statement3);
+                                    while (results3.next()) {
+                                        quantity = results3.getInt("Quantity");
+                                        format = results3.getString("Format");
+                                        title = results3.getString("Title");
+                                        description = results3.getString("Description");
+                                    }
+                                }
+                            }
+                        }
+                        targetList.add(new AssignmentsView(assignmentID, descriptionID, classroom, description, title, quantity, format, deadline));
+                    }
+
+                }
+            }
+        } catch (SQLException resultsException) {
+            System.out.println("Database select all error: " + resultsException.getMessage());
+        }
+    }
+
+    public static void deleteUser(User user, DatabaseConnection databaseConnection){
+        ArrayList<AssignmentsView> assignmentsViews = new ArrayList<>();
+        selectUserRelatedData(user, assignmentsViews, databaseConnection);
+
+        PreparedStatement statement = databaseConnection.newStatement("DELETE FROM SchoolPlanner WHERE UserID = ? AND AssignmentID = ?");
+        PreparedStatement statement2 = databaseConnection.newStatement("DELETE FROM Assignments WHERE AssignmentID = ?");
+        PreparedStatement statement3 = databaseConnection.newStatement("DELETE FROM Classroom WHERE Class = ?");
+        PreparedStatement statement4 = databaseConnection.newStatement("DELETE FROM Description where DescriptionID = ?");
+        PreparedStatement statement5 = databaseConnection.newStatement("DELETE FROM SchoolUser where UserID = ?");
+
+
+        try{
+            if (statement != null && statement2 != null && statement3 != null && statement4 != null) {
+                for(int i = 0; i < assignmentsViews.size(); i++) {
+                    statement.setInt(1, user.getId());
+                    statement.setInt(2, assignmentsViews.get(i).getAssignmentID());
+                    statement2.setInt(1, assignmentsViews.get(i).getAssignmentID());
+                    statement3.setString(1, assignmentsViews.get(i).getClassroom());
+                    statement4.setInt(1, assignmentsViews.get(i).getDescriptionID());
+
+                    databaseConnection.executeUpdate(statement);
+                    databaseConnection.executeUpdate(statement2);
+                    databaseConnection.executeUpdate(statement3);
+                    databaseConnection.executeUpdate(statement4);
+                }
+                statement5.setInt(1, user.getId());
+                databaseConnection.executeUpdate(statement5);
+
             }
 
         } catch (SQLException resultsException) {
