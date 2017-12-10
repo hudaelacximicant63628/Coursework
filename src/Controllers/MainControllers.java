@@ -47,18 +47,20 @@ public class MainControllers {
         }
     }
     public void deleteAssignment(AssignmentsView assignmentsView){
-        Assignments assignments = new Assignments(assignmentsView.getAssignmentID(), assignmentsView.getClassroom(), assignmentsView.getDescriptionID(), assignmentsView.getDeadline());
-        Description description = new Description(assignmentsView.getDescriptionID(), assignmentsView.getDescription(), assignmentsView.getTitle(), assignmentsView.getQuantity(), assignmentsView.getFormat());
-        Classroom classroom = new Classroom(assignmentsView.getClassroomID(),assignmentsView.getClassroom(), assignmentsView.getTeacher());
-        SchoolPlanner schoolPlanner = new SchoolPlanner(assignmentsView.getPlannerID(), AssignmentsStage.userData.getId(), assignmentsView.getAssignmentID());
+        if(assignmentsView != null) {
+            Assignments assignments = new Assignments(assignmentsView.getAssignmentID(), assignmentsView.getClassroom(), assignmentsView.getDescriptionID(), assignmentsView.getDeadline());
+            Description description = new Description(assignmentsView.getDescriptionID(), assignmentsView.getDescription(), assignmentsView.getTitle(), assignmentsView.getQuantity(), assignmentsView.getFormat());
+            Classroom classroom = new Classroom(assignmentsView.getClassroomID(), assignmentsView.getClassroom(), assignmentsView.getTeacher());
+            SchoolPlanner schoolPlanner = new SchoolPlanner(assignmentsView.getPlannerID(), AssignmentsStage.userData.getId(), assignmentsView.getAssignmentID());
 
 
-        AssignmentService.delete(AssignmentsStage.userData, schoolPlanner, assignments, description, classroom, databaseConnection);
-        updateAssignmentsViewTableView();
+            AssignmentService.delete(AssignmentsStage.userData, schoolPlanner, assignments, description, classroom, databaseConnection);
+            updateAssignmentsViewTableView();
+        }
     }
 
     public void modifyAssignment(AssignmentsView selectedAssignmentToModify) {
-        if (AssignmentsStage.enteredData != null && AssignmentsStage.userData != null) {
+        if (AssignmentsStage.enteredData != null && AssignmentsStage.userData != null && selectedAssignmentToModify != null) {
             AssignmentsView enteredData = AssignmentsStage.enteredData;
             Assignments assignments = new Assignments(enteredData.getAssignmentID(), enteredData.getClassroom(), enteredData.getDescriptionID(), enteredData.getDeadline());
             Description description = new Description(enteredData.getDescriptionID(), enteredData.getDescription(), enteredData.getTitle(), enteredData.getQuantity(), enteredData.getFormat());

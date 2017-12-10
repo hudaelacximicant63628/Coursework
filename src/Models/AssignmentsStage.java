@@ -199,10 +199,6 @@ import java.util.Optional;
             });
 
             tableView.setMinHeight(470);
-            //---------------------------------------------------------------------------------------------------------------------
-
-
-            //---------------------------------------------------------------------------------------------------------------------
 
             mainControllers.updateUserListView();
             closeConfirmation(stage);
@@ -216,7 +212,9 @@ import java.util.Optional;
                 String lastName = this.lastName.getText();
                 LocalDate DOB = this.DOB.getValue();
 
-                if (firstName.trim().equals("") || lastName.trim().equals("") || DOB.equals("")) {
+                LocalDate localDate = LocalDate.now();
+
+                if (DOB.isAfter(localDate) || firstName.trim().equals("") || lastName.trim().equals("") || DOB.equals("")) {
                     userData = null;
                 } else {
                     userData = new User(0, firstName, lastName, DOB);
@@ -231,8 +229,11 @@ import java.util.Optional;
                 String format = this.format.getText();
                 LocalDate deadline = this.deadline.getValue();
 
+                LocalDate dateNow = LocalDate.now();
 
-                if(classroom.trim().equals("") || description.trim().equals("")  || title.trim().equals("")  || teacher.trim().equals("")  || this.quantity.getText().equals("")|| format.trim().equals("")  || deadline.equals("")){
+
+
+                if(deadline.isBefore(dateNow) || classroom.trim().equals("") || description.trim().equals("")  || title.trim().equals("")  || teacher.trim().equals("")  || this.quantity.getText().equals("")|| format.trim().equals("")  || deadline.equals("")){
                     enteredData = null;
                     AssignmentsStage.errorReporter.setText("Data has not been entered properly");
                 }else{
