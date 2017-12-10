@@ -1,12 +1,22 @@
 package Models;
 
 public class Classroom {
+    private int classID;
     private String classroom;
     private String teacher;
 
-    public Classroom(String classroom, String teacher) {
+    public Classroom(int classID, String classroom, String teacher) {
+        this.classID = classID;
         this.classroom = classroom;
         this.teacher = teacher;
+    }
+
+    public int getClassID() {
+        return classID;
+    }
+
+    public void setClassID(int classID) {
+        this.classID = classID;
     }
 
     public String getClassroom() {
@@ -28,7 +38,8 @@ public class Classroom {
     @Override
     public String toString() {
         return "Classroom{" +
-                "classroom='" + classroom + '\'' +
+                "classID=" + classID +
+                ", classroom='" + classroom + '\'' +
                 ", teacher='" + teacher + '\'' +
                 '}';
     }

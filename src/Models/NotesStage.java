@@ -24,6 +24,7 @@ public class NotesStage extends Application{
     private Button user;
     private Button notes;
     private Button use;
+    private TextField note;
     public static User userData;
 
     @Override
@@ -65,12 +66,12 @@ public class NotesStage extends Application{
         Button addNote = new Button("Add note");
         Button deleteNote = new Button("Delete note");
 
-        TextField note = new TextField();
+        note = new TextField();
         note.setPrefWidth(800);
         notesStageHBox.getChildren().addAll(addNote, deleteNote,user,  note);
 
 
-        TableView notesTableView = new TableView<>();
+        TableView<Notes> notesTableView = new TableView<>();
         TableColumn notesColumn = new TableColumn<>("Notes");
         notesTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         notesColumn.setCellValueFactory(new PropertyValueFactory<>("notes"));
@@ -85,12 +86,19 @@ public class NotesStage extends Application{
         ObservableList selectedItems = notesTableView.getSelectionModel().getSelectedItems();
         Scene assignmentScene = new Scene(notesStageVBox);
 
-        deleteNote.setOnAction(e -> notesData.remove(selectedItems.get(0)));
+        deleteNote.setOnAction(e -> {
+            if(notesTableView.getSelectionModel().getSelectedItem() != null) {
+                NotesService.delete(notesTableView.getSelectionModel().getSelectedItem(), mainControllers.databaseConnection);
+                mainControllers.updateNotesTableView();
+                note.clear();
+            }
+        });
         addNote.setOnAction(e -> {
-            if(note.getText() != null) {
+            if(!(note.getText().isEmpty())) {
                 NotesService.save(new Notes(0, userData.getId(), note.getText()), userData, mainControllers.databaseConnection);
                 mainControllers.updateNotesTableView();
                 note.clear();
+
             }
 
         });
