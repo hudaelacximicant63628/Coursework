@@ -38,7 +38,7 @@ import java.util.Optional;
         private TextField quantity;
         private TextField format;
         public static TextArea errorReporter;
-        private ListView<User> userListView;
+        private static ListView<User> userListView;
 
         private DatePicker DOB;
         private TextField userName;
@@ -99,7 +99,6 @@ import java.util.Optional;
             userListView.setMinWidth(500);
 
             userListView.setItems(userListViewData);
-
 
             HBox userSceneHBox = new HBox();
             HBox userSceneButtonsHBox = new HBox();
@@ -191,8 +190,14 @@ import java.util.Optional;
             addUser.setOnAction(e ->
             {
                 getUserInfo();
+                clearTextFields();
+                System.out.println(AssignmentsStage.userData);
                 mainControllers.addUser();
-                this.userName = null;
+                userData = null;
+            });
+            removeUser.setOnAction(e -> {
+                userData = userListView.getSelectionModel().getSelectedItem();
+                mainControllers.deleteUser();
             });
 
             tableView.setMinHeight(470);
@@ -210,7 +215,7 @@ import java.util.Optional;
 
         public void getUserInfo() {
             try {
-                String firstName = userName.getText();
+                String firstName = this.userName.getText();
                 String lastName = this.lastName.getText();
                 LocalDate DOB = this.DOB.getValue();
 
@@ -248,6 +253,9 @@ import java.util.Optional;
             quantity.clear();
             format.clear();
             deadline.getEditor().clear();
+            userName.clear();
+            lastName.clear();
+            DOB = null;
         }
 
 

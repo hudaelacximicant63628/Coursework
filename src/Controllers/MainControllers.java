@@ -67,18 +67,31 @@ public class MainControllers {
 
 
     //remove all entries made by user including itself
-    public void removeUser(){
 
-    }
-
-
-    public void addUser(){
+    public void addUser() {
         AssignmentsStage.userListViewData.clear();
+        ArrayList<User> users = new ArrayList<>();
+        UserService.selectAll(users, databaseConnection);
+
         if (AssignmentsStage.userData != null) {
-            UserService.save(AssignmentsStage.userData, databaseConnection);
+            for (User user : users) {
+                if (user.getDOB() != AssignmentsStage.userData.getDOB() && user.getFirstName().equals(AssignmentsStage.userData.getFirstName()) && user.getLastName().equals(AssignmentsStage.userData.getLastName())) {
+                    UserService.save(AssignmentsStage.userData, databaseConnection);
+                }
+            }
+            updateUserListView();
+
         }
-        updateUserListView();
     }
+
+    public void deleteUser(){
+        UserService.deleteUser(AssignmentsStage.userData, databaseConnection);
+        AssignmentsStage.userListViewData.clear();
+        updateUserListView();
+        updateAssignmentsViewTableView();
+    }
+
+
 
     public void updateAssignmentsViewTableView(){
         AssignmentsStage.getTableViewData().clear();
