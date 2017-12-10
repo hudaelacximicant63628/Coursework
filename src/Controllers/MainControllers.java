@@ -20,65 +20,76 @@ public class MainControllers {
 
     public void addAssignment() {
 
-        AssignmentsView assignmentDataEntered = AssignmentsStage.enteredData;
+        if (AssignmentsStage.userData != null && AssignmentsStage.enteredData != null) {
 
-        User userDataEntered = AssignmentsStage.userData;
+                AssignmentsView assignmentDataEntered = AssignmentsStage.enteredData;
+                User userDataEntered = AssignmentsStage.userData;
+                saveUserToDatabase = userDataEntered;
+                System.out.println(saveUserToDatabase);
 
-        if (userDataEntered != null || assignmentDataEntered != null) {
+                //adds to database
+                Description saveDescriptionToDatabase = new Description(0, assignmentDataEntered.getDescription(), assignmentDataEntered.getTitle(), assignmentDataEntered.getQuantity(), assignmentDataEntered.getFormat());
+                Classroom saveClassroomToDatabase = new Classroom(0,assignmentDataEntered.getClassroom(), assignmentDataEntered.getTeacher());
+                Assignments saveAssignmentToDatabase = new Assignments(0, saveClassroomToDatabase.getClassroom(), saveDescriptionToDatabase.getDescriptionID(), assignmentDataEntered.getDeadline());
 
-            saveUserToDatabase = userDataEntered;
+                AssignmentService.save(saveDescriptionToDatabase, saveClassroomToDatabase, databaseConnection);
+                AssignmentService.saveToAssignments(saveDescriptionToDatabase.getDescriptionID(), saveClassroomToDatabase.getClassID(), saveAssignmentToDatabase, databaseConnection);
 
-            //adds to database
-            Description saveDescriptionToDatabase = new Description(0, assignmentDataEntered.getDescription(), assignmentDataEntered.getTitle(), assignmentDataEntered.getQuantity(), assignmentDataEntered.getFormat());
-            Classroom saveClassroomToDatabase = new Classroom(assignmentDataEntered.getClassroom(), assignmentDataEntered.getTeacher());
-            Assignments saveAssignmentToDatabase = new Assignments(0, saveClassroomToDatabase.getClassroom(), saveDescriptionToDatabase.getDescriptionID(), assignmentDataEntered.getDeadline());
+                SchoolPlanner schoolPlanner = new SchoolPlanner(0, saveUserToDatabase.getId(), saveAssignmentToDatabase.getAssignmentID());
 
-            AssignmentService.save(saveDescriptionToDatabase, saveClassroomToDatabase, databaseConnection);
-            AssignmentService.saveToAssignments(saveDescriptionToDatabase.getDescriptionID(), saveClassroomToDatabase.getClassroom(), saveAssignmentToDatabase, databaseConnection);
 
-            AssignmentService.saveToPlanner(saveUserToDatabase, saveAssignmentToDatabase, databaseConnection);
+                AssignmentService.saveToPlanner(schoolPlanner, databaseConnection);
 
             updateAssignmentsViewTableView();
 
+        }else{
+            AssignmentsStage.errorReporter.setText("Data has not been entered properly");
         }
     }
     public void deleteAssignment(AssignmentsView assignmentsView){
         Assignments assignments = new Assignments(assignmentsView.getAssignmentID(), assignmentsView.getClassroom(), assignmentsView.getDescriptionID(), assignmentsView.getDeadline());
         Description description = new Description(assignmentsView.getDescriptionID(), assignmentsView.getDescription(), assignmentsView.getTitle(), assignmentsView.getQuantity(), assignmentsView.getFormat());
-        Classroom classroom = new Classroom(assignmentsView.getClassroom(), assignmentsView.getTeacher());
+        Classroom classroom = new Classroom(assignmentsView.getClassroomID(),assignmentsView.getClassroom(), assignmentsView.getTeacher());
+        SchoolPlanner schoolPlanner = new SchoolPlanner(assignmentsView.getPlannerID(), AssignmentsStage.userData.getId(), assignmentsView.getAssignmentID());
 
-        AssignmentService.delete(AssignmentsStage.userData, assignments, description, classroom, databaseConnection);
+
+        AssignmentService.delete(AssignmentsStage.userData, schoolPlanner, assignments, description, classroom, databaseConnection);
         updateAssignmentsViewTableView();
     }
 
-    public void modifyAssignment() {
-        if (AssignmentsStage.enteredData != null) {
+    public void modifyAssignment(AssignmentsView selectedAssignmentToModify) {
+        if (AssignmentsStage.enteredData != null && AssignmentsStage.userData != null) {
             AssignmentsView enteredData = AssignmentsStage.enteredData;
             Assignments assignments = new Assignments(enteredData.getAssignmentID(), enteredData.getClassroom(), enteredData.getDescriptionID(), enteredData.getDeadline());
             Description description = new Description(enteredData.getDescriptionID(), enteredData.getDescription(), enteredData.getTitle(), enteredData.getQuantity(), enteredData.getFormat());
-            Classroom classroom = new Classroom(enteredData.getClassroom(), enteredData.getTeacher());
+            Classroom classroom = new Classroom(enteredData.getClassroomID(), enteredData.getClassroom(), enteredData.getTeacher());
 
-            AssignmentService.modifyAssignment(AssignmentsStage.userData, assignments, description, classroom, databaseConnection);
+            AssignmentService.modifyAssignment(selectedAssignmentToModify, assignments, description, classroom, databaseConnection);
             updateAssignmentsViewTableView();
         }
 
 
     }
 
-
-    //remove all entries made by user including itself
-    public void removeUser(){
-
-    }
-
-
-    public void addUser(){
+    public void addUser() {
         AssignmentsStage.userListViewData.clear();
-        if (AssignmentsStage.userData != null) {
+        if(AssignmentsStage.userData != null) {
             UserService.save(AssignmentsStage.userData, databaseConnection);
         }
         updateUserListView();
+        AssignmentsStage.userData = null;
+
+
     }
+
+    public void deleteUser(){
+        UserService.deleteUser(AssignmentsStage.userData, databaseConnection);
+        AssignmentsStage.userListViewData.clear();
+        updateUserListView();
+        updateAssignmentsViewTableView();
+    }
+
+
 
     public void updateAssignmentsViewTableView(){
         AssignmentsStage.getTableViewData().clear();

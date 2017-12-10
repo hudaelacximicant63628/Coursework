@@ -38,7 +38,7 @@ import java.util.Optional;
         private TextField quantity;
         private TextField format;
         public static TextArea errorReporter;
-        private ListView<User> userListView;
+        private static ListView<User> userListView;
 
         private DatePicker DOB;
         private TextField userName;
@@ -99,7 +99,6 @@ import java.util.Optional;
             userListView.setMinWidth(500);
 
             userListView.setItems(userListViewData);
-
 
             HBox userSceneHBox = new HBox();
             HBox userSceneButtonsHBox = new HBox();
@@ -183,7 +182,7 @@ import java.util.Optional;
             remove.setOnAction(e -> mainControllers.deleteAssignment(tableView.getSelectionModel().getSelectedItem()));
             modify.setOnAction(e -> {
                 getAssignmentData();
-                mainControllers.modifyAssignment();
+                mainControllers.modifyAssignment(tableView.getSelectionModel().getSelectedItem());
 
             });
             userSceneButton.setOnAction(e -> stage.setScene(userScene));
@@ -192,7 +191,11 @@ import java.util.Optional;
             {
                 getUserInfo();
                 mainControllers.addUser();
-                this.userName = null;
+                clearTextFields();
+            });
+            removeUser.setOnAction(e -> {
+                userData = userListView.getSelectionModel().getSelectedItem();
+                mainControllers.deleteUser();
             });
 
             tableView.setMinHeight(470);
@@ -209,35 +212,34 @@ import java.util.Optional;
         }
 
         public void getUserInfo() {
-            try {
-                String firstName = userName.getText();
+                String firstName = this.userName.getText();
                 String lastName = this.lastName.getText();
                 LocalDate DOB = this.DOB.getValue();
 
-                if (firstName == null || lastName == null || DOB == null) {
-                    errorReporter.setText("User info has not been filled in correctly" + "\n");
+                if (firstName.trim().equals("") || lastName.trim().equals("") || DOB.equals("")) {
                     userData = null;
                 } else {
                     userData = new User(0, firstName, lastName, DOB);
                 }
-            }catch (NullPointerException e){
-            }
         }
 
-        public void getAssignmentData(){
-            try {
+        public void getAssignmentData() throws NumberFormatException{
                 String classroom = this.className.getText();
                 String description = this.description.getText();
                 String title = this.title.getText();
                 String teacher = this.teacherName.getText();
-                int quantity = Integer.parseInt(this.quantity.getText());
                 String format = this.format.getText();
                 LocalDate deadline = this.deadline.getValue();
 
-                enteredData = new AssignmentsView(teacher, classroom, description, title, quantity, format, deadline);
-            }catch(NumberFormatException e){
-                    errorReporter.appendText("Options have not been filled properly");
+
+                if(classroom.trim().equals("") || description.trim().equals("")  || title.trim().equals("")  || teacher.trim().equals("")  || this.quantity.getText().equals("")|| format.trim().equals("")  || deadline.equals("")){
+                    enteredData = null;
+                    AssignmentsStage.errorReporter.setText("Data has not been entered properly");
+                }else{
+                    int quantity = Integer.parseInt(this.quantity.getText());
+                    enteredData = new AssignmentsView(teacher, classroom, description, title, quantity, format, deadline);
                 }
+
         }
 
         public void clearTextFields(){
@@ -247,6 +249,9 @@ import java.util.Optional;
             teacherName.clear();
             quantity.clear();
             format.clear();
+            userName.clear();
+            lastName.clear();
+            DOB.getEditor().clear();
             deadline.getEditor().clear();
         }
 
