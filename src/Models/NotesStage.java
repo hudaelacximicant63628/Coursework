@@ -102,7 +102,7 @@ public class NotesStage extends Application{
             }
 
         });
-        use.setOnAction(e -> {
+        use.setOnAction(e -> {  
             userData = listView.getSelectionModel().getSelectedItem();
             if(userData != null) {
                 mainControllers.updateNotesTableView();
