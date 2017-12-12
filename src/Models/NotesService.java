@@ -87,6 +87,23 @@ public class NotesService {
         }
 
     }
+    public static void delete(Notes notes, DatabaseConnection database){
+
+
+        PreparedStatement statement = database.newStatement("DELETE FROM Notes WHERE NotesID = ?");
+
+
+
+        try{
+            if (statement != null) {
+                statement.setInt(1, notes.getNotesID());
+                database.executeUpdate(statement);
+            }
+
+        } catch (SQLException resultsException) {
+            System.out.println("Database select all error: " + resultsException.getMessage());
+        }
+    }
 
 
 

@@ -41,6 +41,8 @@ public class UserService {
     public static void selectUserRelatedData(User user, List<AssignmentsView> targetList, DatabaseConnection database) {
 
         int userId = user.getId();
+        int plannerID = 0;
+        int classID = 0;
         int assignmentID = 0;
         int descriptionID = 0;
         LocalDate deadline = null;
@@ -63,31 +65,49 @@ public class UserService {
                     while (results1.next()) {
                         assignmentID = results1.getInt("AssignmentID");
 
-                        PreparedStatement statement2 = database.newStatement(String.format("SELECT Class, DescriptionID, Deadline FROM Assignments WHERE AssignmentID = %2d", assignmentID));
-                        if (database.runQuery(statement2) != null) {
-                            ResultSet results2 = database.runQuery(statement2);
-                            while (results2.next()) {
-                                deadline = LocalDate.parse(results2.getString("Deadline"), formatter);
-                                descriptionID = results2.getInt("DescriptionID");
-                                classroom = results2.getString("Class");
+                        PreparedStatement preparedStatement5 = database.newStatement(String.format("SELECT PlannerID FROM SchoolPlanner WHERE AssignmentID = %2d", assignmentID));
+                        if (database.runQuery(preparedStatement5) != null) {
+                            ResultSet results5 = database.runQuery(preparedStatement5);
+                            while (results5.next()) {
+                                plannerID = results5.getInt("PlannerID");
 
-                                PreparedStatement statement3 = database.newStatement(String.format("SELECT Quantity, Format, Title, Description FROM Description WHERE DescriptionID = %2d", descriptionID));
-                                if (database.runQuery(statement3) != null) {
-                                    ResultSet results3 = database.runQuery(statement3);
-                                    while (results3.next()) {
-                                        quantity = results3.getInt("Quantity");
-                                        format = results3.getString("Format");
-                                        title = results3.getString("Title");
-                                        description = results3.getString("Description");
+
+                                PreparedStatement statement2 = database.newStatement(String.format("SELECT ClassID, DescriptionID, Deadline FROM Assignments WHERE AssignmentID = %2d", assignmentID));
+                                if (database.runQuery(statement2) != null) {
+                                    ResultSet results2 = database.runQuery(statement2);
+                                    while (results2.next()) {
+                                        deadline = LocalDate.parse(results2.getString("Deadline"), formatter);
+                                        descriptionID = results2.getInt("DescriptionID");
+                                        classID = results2.getInt("ClassID");
+
+                                        PreparedStatement statement3 = database.newStatement(String.format("SELECT Quantity, Format, Title, Description FROM Description WHERE DescriptionID = %2d", descriptionID));
+                                        if (database.runQuery(statement3) != null) {
+                                            ResultSet results3 = database.runQuery(statement3);
+                                            while (results3.next()) {
+                                                quantity = results3.getInt("Quantity");
+                                                format = results3.getString("Format");
+                                                title = results3.getString("Title");
+                                                description = results3.getString("Description");
+
+                                                PreparedStatement statement4 = database.newStatement(String.format("SELECT Class FROM Classroom WHERE ClassID = %2d", classID));
+                                                if (database.runQuery(statement4) != null) {
+                                                    ResultSet results4 = database.runQuery(statement4);
+                                                    while (results4.next()) {
+                                                        classroom = results4.getString("Class");
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
-                        targetList.add(new AssignmentsView(assignmentID, descriptionID, classroom, description, title, quantity, format, deadline));
+                        targetList.add(new AssignmentsView(plannerID, classID, assignmentID, descriptionID, classroom, description, title, quantity, format, deadline));
                     }
-
                 }
+
             }
+
         } catch (SQLException resultsException) {
             System.out.println("Database select all error: " + resultsException.getMessage());
         }
