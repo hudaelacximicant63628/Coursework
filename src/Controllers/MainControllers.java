@@ -1,12 +1,6 @@
 package Controllers;
 
 import Models.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.security.cert.CertificateNotYetValidException;
-import java.util.ArrayList;
-
 
 public class MainControllers {
 
@@ -33,11 +27,13 @@ public class MainControllers {
                 Assignments saveAssignmentToDatabase = new Assignments(0, saveClassroomToDatabase.getClassroom(), saveDescriptionToDatabase.getDescriptionID(), assignmentDataEntered.getDeadline());
 
                 AssignmentService.save(saveDescriptionToDatabase, saveClassroomToDatabase, databaseConnection);
+                //last new id is needed in order to save to assignments it is NOT to be confused with changing primary key values stored in a table
                 AssignmentService.saveToAssignments(saveDescriptionToDatabase.getDescriptionID(), saveClassroomToDatabase.getClassID(), saveAssignmentToDatabase, databaseConnection);
 
                 SchoolPlanner schoolPlanner = new SchoolPlanner(0, saveUserToDatabase.getId(), saveAssignmentToDatabase.getAssignmentID());
 
 
+                //also used to save to planner
                 AssignmentService.saveToPlanner(schoolPlanner, databaseConnection);
 
             updateAssignmentsViewTableView();
@@ -54,7 +50,7 @@ public class MainControllers {
             SchoolPlanner schoolPlanner = new SchoolPlanner(assignmentsView.getPlannerID(), AssignmentsStage.userData.getId(), assignmentsView.getAssignmentID());
 
 
-            AssignmentService.delete(AssignmentsStage.userData, schoolPlanner, assignments, description, classroom, databaseConnection);
+            AssignmentService.delete(schoolPlanner, assignments, description, classroom, databaseConnection);
             updateAssignmentsViewTableView();
         }
     }
