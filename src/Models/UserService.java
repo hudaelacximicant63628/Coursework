@@ -1,10 +1,12 @@
 package Models;
 
+import javax.xml.crypto.Data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -36,69 +38,61 @@ public class UserService {
         }
     }
 
-    public static Object selectById(int id, DatabaseConnection database) {
 
-        PreparedStatement statement = null;
+    public static void deleteUser(User user, DatabaseConnection databaseConnection){
+        ArrayList<AssignmentsView> assignmentsViews = new ArrayList<>();
+        AssignmentService.selectAll(user, assignmentsViews, databaseConnection);
 
-        statement = database.newStatement("SELECT UserID, Firstname, Lastname, DOB WHERE UserID = ?");
+        PreparedStatement statement = databaseConnection.newStatement("DELETE FROM SchoolPlanner WHERE UserID = ? AND AssignmentID = ?");
+        PreparedStatement statement2 = databaseConnection.newStatement("DELETE FROM Assignments WHERE AssignmentID = ?");
+        PreparedStatement statement3 = databaseConnection.newStatement("DELETE FROM Classroom WHERE Class = ?");
+        PreparedStatement statement4 = databaseConnection.newStatement("DELETE FROM Description WHERE DescriptionID = ?");
+        PreparedStatement statement5 = databaseConnection.newStatement("DELETE FROM SchoolUser WHERE UserID = ?");
+        PreparedStatement statement6 = databaseConnection.newStatement("DELETE From Notes WHERE UserID = ?");
 
 
-        Object result = null;
+        try{
+            if (statement != null && statement2 != null && statement3 != null && statement4 != null && statement6 != null) {
+                for(int i = 0; i < assignmentsViews.size(); i++) {
+                    statement.setInt(1, user.getId());
+                    statement.setInt(2, assignmentsViews.get(i).getAssignmentID());
+                    statement2.setInt(1, assignmentsViews.get(i).getAssignmentID());
+                    statement3.setString(1, assignmentsViews.get(i).getClassroom());
+                    statement4.setInt(1, assignmentsViews.get(i).getDescriptionID());
 
-        try {
-            if (statement != null) {
-
-                statement.setInt(1, id);
-                ResultSet results = database.runQuery(statement);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-                try {
-                    if (results != null) {
-                        LocalDate dob = LocalDate.parse(results.getString("Deadline"), formatter);
-                        result = new User(results.getInt("UserID"), results.getString("Firstname"), results.getString("Lastname"),dob);
-                    }
-                }catch (Exception e){
-
+                    databaseConnection.executeUpdate(statement);
+                    databaseConnection.executeUpdate(statement2);
+                    databaseConnection.executeUpdate(statement3);
+                    databaseConnection.executeUpdate(statement4);
                 }
+                statement5.setInt(1, user.getId());
+                databaseConnection.executeUpdate(statement5);
+
+                statement6.setInt(1, user.getId());
+                databaseConnection.executeUpdate(statement6);
             }
+
         } catch (SQLException resultsException) {
-            System.out.println("Database select by id error: " + resultsException.getMessage());
+            System.out.println("Database select all error: " + resultsException.getMessage());
         }
-
-        return result;
     }
-    public static void delete(User user, Assignments assignments, Description description, Classroom classroom, DatabaseConnection database){
 
-    }
 
     public static void save(User user, DatabaseConnection database) {
 
-        Object existingItem = null;
-
-        int userID = user.getId();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String userDOBToString = user.getDOB().format(formatter);
 
-        if(userID != 0) existingItem = selectById(userID, database);
 
         try {
-            if (existingItem == null) {
                 PreparedStatement statement = database.newStatement("INSERT INTO SchoolUser (Firstname, Lastname, DOB) VALUES (?,?,?)");
                 statement.setString(1, user.getFirstName());
                 statement.setString(2, user.getLastName());
                 statement.setString(3, userDOBToString);
                 database.executeUpdate(statement);
                 user.setId(database.lastNewId());
-            }
-            else {
-                PreparedStatement statement = database.newStatement("UPDATE SchoolUser SET Firstname = ?, Lastname = ?, DOB = ? WHERE UserID = ?");
-                statement.setString(1, user.getFirstName());
-                statement.setString(2, user.getLastName());
-                statement.setString(3, userDOBToString);
-                statement.setInt(4, userID);
-                database.executeUpdate(statement);
-            }
+
         } catch (SQLException resultsException) {
             System.out.println("Database saving error: " + resultsException.getMessage());
         }

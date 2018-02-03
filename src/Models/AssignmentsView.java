@@ -11,6 +11,8 @@ import java.util.ArrayList;
 public class AssignmentsView {
     private int assignmentID;
     private int descriptionID;
+    private int classroomID;
+    private int plannerID;
     private String teacher;
     private final SimpleStringProperty description;
     private final SimpleStringProperty title;
@@ -20,19 +22,21 @@ public class AssignmentsView {
     private final SimpleObjectProperty<LocalDate> deadline;
 
 
-    public AssignmentsView(int assignmentID, int descriptionID, String classroom, String description, String title, int quantity, String format, LocalDate deadline) {
+    public AssignmentsView(int classroomID, int plannerID, int assignmentID, int descriptionID, String classroom, String description, String title, int quantity, String format, LocalDate deadline) {
         this.description = new SimpleStringProperty(description);
         this.title = new SimpleStringProperty(title);
         this.quantity = new SimpleIntegerProperty(quantity);
         this.format = new SimpleStringProperty(format);
         this.classroom = new SimpleStringProperty(classroom);
         this.deadline = new SimpleObjectProperty<>(deadline);
+        this.plannerID= plannerID;
+        this.classroomID = classroomID;
         this.assignmentID = assignmentID;
         this.descriptionID = descriptionID;
 
     }
-    public AssignmentsView(String teacher, String classroom, String descriptionID, String title, int quantity, String format, LocalDate deadline) {
-        this.description = new SimpleStringProperty(descriptionID);
+    public AssignmentsView(String teacher, String classroom, String description, String title, int quantity, String format, LocalDate deadline) {
+        this.description = new SimpleStringProperty(description);
         this.teacher = teacher;
         this.title = new SimpleStringProperty(title);
         this.quantity = new SimpleIntegerProperty(quantity);
@@ -135,6 +139,22 @@ public class AssignmentsView {
 
     public void setTeacher(String teacher) {
         this.teacher = teacher;
+    }
+
+    public int getClassroomID() {
+        return classroomID;
+    }
+
+    public void setClassroomID(int classroomID) {
+        this.classroomID = classroomID;
+    }
+
+    public int getPlannerID() {
+        return plannerID;
+    }
+
+    public void setPlannerID(int plannerID) {
+        this.plannerID = plannerID;
     }
 
     @Override

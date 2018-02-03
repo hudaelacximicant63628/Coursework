@@ -2,6 +2,7 @@ package Models;
 
 import Controllers.MainControllers;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,23 +18,28 @@ import javafx.stage.WindowEvent;
 
 import java.util.Optional;
 
-public class NotesStage extends Application{
+public class NotesStage{
 
     private ListView<User> listView;
     public static ObservableList<Notes> notesData;
     private Button user;
     private Button notes;
     private Button use;
+    private TextField note;
     public static User userData;
 
-    @Override
-    public void start(Stage stage) throws Exception {
+    public NotesStage() throws Exception {
+        Stage stage = new Stage();
+        start(stage);
+    }
+
+    public void start(Stage notesStage) throws Exception {
         MainControllers mainControllers = new MainControllers();
-        stage.setTitle("Notes");
+        notesStage.setTitle("Notes");
         Image icon = new Image(getClass().getResourceAsStream("/Resources/school_planner_icon.png"));
-        stage.getIcons().add(icon);
-        stage.setMaxHeight(580);
-        stage.setMaxWidth(1200);
+        notesStage.getIcons().add(icon);
+        notesStage.setMaxHeight(580);
+        notesStage.setMaxWidth(1200);
 
         notesData = FXCollections.observableArrayList();
 
@@ -45,7 +51,7 @@ public class NotesStage extends Application{
         HBox userSceneHBox = new HBox();
         userSceneHBox.getChildren().addAll(notes,use);
         userSceneVBox.getChildren().addAll(listView, userSceneHBox);
-        user = new Button("UserView");
+        user = new Button("User");
 
         ObservableList<User> userList = FXCollections.observableArrayList();
         UserService.selectAll(userList, mainControllers.databaseConnection);
@@ -65,12 +71,12 @@ public class NotesStage extends Application{
         Button addNote = new Button("Add note");
         Button deleteNote = new Button("Delete note");
 
-        TextField note = new TextField();
+        note = new TextField();
         note.setPrefWidth(800);
         notesStageHBox.getChildren().addAll(addNote, deleteNote,user,  note);
 
 
-        TableView notesTableView = new TableView<>();
+        TableView<Notes> notesTableView = new TableView<>();
         TableColumn notesColumn = new TableColumn<>("Notes");
         notesTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         notesColumn.setCellValueFactory(new PropertyValueFactory<>("notes"));
@@ -82,54 +88,49 @@ public class NotesStage extends Application{
         note.setPromptText("Enter note");
         notesStageVBox.getChildren().addAll(notesTableView, notesStageHBox);
 
-        ObservableList selectedItems = notesTableView.getSelectionModel().getSelectedItems();
         Scene assignmentScene = new Scene(notesStageVBox);
 
-        deleteNote.setOnAction(e -> notesData.remove(selectedItems.get(0)));
-        addNote.setOnAction(e -> {
-            if(note.getText() != null) {
-                NotesService.save(new Notes(0, userData.getId(), note.getText()), userData, mainControllers.databaseConnection);
+        deleteNote.setOnAction(e -> {
+            if(notesTableView.getSelectionModel().getSelectedItem() != null) {
+                NotesService.delete(notesTableView.getSelectionModel().getSelectedItem(), mainControllers.databaseConnection);
                 mainControllers.updateNotesTableView();
                 note.clear();
             }
+        });
+        addNote.setOnAction(e -> {
+            if(!(note.getText().isEmpty()) && userData != null) {
+                NotesService.save(new Notes(0, userData.getId(), note.getText()), userData, mainControllers.databaseConnection);
+                mainControllers.updateNotesTableView();
+                note.clear();
+
+            }else{
+                AssignmentsStage.errorReporter.setText("Select a user for the notes");
+            }
 
         });
-        use.setOnAction(e -> {
+        use.setOnAction(e -> {  
             userData = listView.getSelectionModel().getSelectedItem();
-            mainControllers.updateNotesTableView();
-        });
+            System.out.println(userData);
+            if(userData != null) {
+                mainControllers.updateNotesTableView();
+            }        });
 
-        notes.setOnAction(e -> stage.setScene(assignmentScene));
-        user.setOnAction(e -> stage.setScene(userScene));
+        notes.setOnAction(e -> notesStage.setScene(assignmentScene));
+        user.setOnAction(e -> notesStage.setScene(userScene));
 
         notesTableView.setItems(notesData);
 
-        stage.setScene(assignmentScene);
+        notesStage.setScene(assignmentScene);
 
-
-        closeConfirmation(stage);
-        stage.show();
+        mainControllers.closeConfirmation(notesStage);
+        notesStage.show();
 
     }
 
 
-    private void closeConfirmation(Stage stage){
-        stage.setOnCloseRequest((WindowEvent we) ->
-        {
-            Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-            a.setTitle("Confirmation");
-            a.setHeaderText("Do you really want to leave?");
-            Optional<ButtonType> closeResponse = a.showAndWait();
-            if (closeResponse.get() == ButtonType.OK){
-                System.exit(0);
-            }else{
-                we.consume();
-            }
-        });
-    }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+//    public static void main(String[] args) {
+//        launch(args);
+//    }
 
 }

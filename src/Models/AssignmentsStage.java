@@ -1,6 +1,7 @@
 package Models;
 
 import Controllers.MainControllers;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -29,6 +32,7 @@ import java.util.Optional;
         private Button AssignmentSceneButton;
         private Button User;
         private Button removeUser;
+        private Button notesStage;
 
         private DatePicker deadline;
         private TextField teacherName;
@@ -38,7 +42,7 @@ import java.util.Optional;
         private TextField quantity;
         private TextField format;
         public static TextArea errorReporter;
-        private ListView<User> userListView;
+        private static ListView<User> userListView;
 
         private DatePicker DOB;
         private TextField userName;
@@ -55,7 +59,7 @@ import java.util.Optional;
         }
 
         @Override
-        public void start(Stage stage) {
+        public void start(Stage assignmentStage) {
             mainControllers = new MainControllers();
             TableView<AssignmentsView> tableView = new TableView();
 
@@ -64,10 +68,11 @@ import java.util.Optional;
 
             remove = new Button("Remove");
             modify = new Button("Modify");
-            userSceneButton = new Button("UserView");
+            userSceneButton = new Button("User");
             AssignmentSceneButton = new Button("Assignments");
             User = new Button("Use");
             removeUser = new Button("Remove");
+            notesStage = new Button("Notes");
 
 
             DOB = new DatePicker();
@@ -100,12 +105,11 @@ import java.util.Optional;
 
             userListView.setItems(userListViewData);
 
-
             HBox userSceneHBox = new HBox();
             HBox userSceneButtonsHBox = new HBox();
 
             HBox assignmentSceneHBox = new HBox();
-            assignmentSceneHBox.getChildren().addAll(add, remove, modify, userSceneButton);
+            assignmentSceneHBox.getChildren().addAll(add, remove, modify, userSceneButton, notesStage);
 
             VBox assignmentSceneVBox = new VBox();
             assignmentSceneVBox.getChildren().addAll(tableView, title, description, className, teacherName, deadline, quantity, format, assignmentSceneHBox, errorReporter);
@@ -126,14 +130,15 @@ import java.util.Optional;
 
             Scene assignmentScene = new Scene(assignmentSceneVBox, 1000, 830);
             Scene userScene = new Scene(userSceneHBox, 800, 200);
-            stage.setTitle("School planner");
+            assignmentStage.setTitle("School planner");
 
             Image icon = new Image(getClass().getResourceAsStream("/Resources/school_planner_icon.png"));
-            stage.getIcons().add(icon);
+            assignmentStage.getIcons().add(icon);
 
             //TABLE COLUMNS
 
             //has equal spacing for each column
+
 
             tableView.setPrefSize(400, 300);
             tableView.setItems(tableViewData);
@@ -168,8 +173,7 @@ import java.util.Optional;
 //            tableView.getSelectionModel().getSelectedItem().getAssignmentID();
 //            tableView.getSelectionModel().getSelectedItem().getDescriptionID();
 //
-
-            //Button--------------------------------------------------------------------------------------------------
+            //Button-------------------------------------------------------------------------------------------------------
 
             add.setOnAction(e -> {
                 errorReporter.clear();
@@ -177,67 +181,88 @@ import java.util.Optional;
                 mainControllers.addAssignment();
                 clearTextFields();
             });
-            User.setOnAction(e -> {userData = userListView.getSelectionModel().getSelectedItem();
+            User.setOnAction(e -> {
+                userData = userListView.getSelectionModel().getSelectedItem();
+                System.out.println(userData);
                 mainControllers.updateAssignmentsViewTableView();
             });
             remove.setOnAction(e -> mainControllers.deleteAssignment(tableView.getSelectionModel().getSelectedItem()));
             modify.setOnAction(e -> {
                 getAssignmentData();
-                mainControllers.modifyAssignment();
+                mainControllers.modifyAssignment(tableView.getSelectionModel().getSelectedItem());
 
             });
-            userSceneButton.setOnAction(e -> stage.setScene(userScene));
-            AssignmentSceneButton.setOnAction(e -> stage.setScene(assignmentScene));
+            userSceneButton.setOnAction(e -> assignmentStage.setScene(userScene));
+            AssignmentSceneButton.setOnAction(e -> assignmentStage.setScene(assignmentScene));
             addUser.setOnAction(e ->
             {
+                errorReporter.clear();
                 getUserInfo();
                 mainControllers.addUser();
-                this.userName = null;
+                clearTextFields();
             });
+            removeUser.setOnAction(e -> {
+                userData = userListView.getSelectionModel().getSelectedItem();
+                mainControllers.deleteUser();
+            });
+            notesStage.setOnAction(e -> mainControllers.runNotesStage());
 
             tableView.setMinHeight(470);
-            //---------------------------------------------------------------------------------------------------------------------
-
-
-            //---------------------------------------------------------------------------------------------------------------------
 
             mainControllers.updateUserListView();
-            closeConfirmation(stage);
-            stage.setScene(assignmentScene);
-            stage.show();
+            errorReporter.setText("Pick a user and add assignments");
+            mainControllers.closeConfirmation(assignmentStage);
+            assignmentStage.setScene(assignmentScene);
+            assignmentStage.show();
 
         }
 
         public void getUserInfo() {
-            try {
-                String firstName = userName.getText();
+                String firstName = this.userName.getText();
                 String lastName = this.lastName.getText();
                 LocalDate DOB = this.DOB.getValue();
 
-                if (firstName == null || lastName == null || DOB == null) {
-                    errorReporter.setText("User info has not been filled in correctly" + "\n");
-                    userData = null;
-                } else {
-                    userData = new User(0, firstName, lastName, DOB);
+                LocalDate localDate = LocalDate.now();
+
+                try {
+                    if (DOB.isAfter(localDate) || firstName.trim().equals("") || lastName.trim().equals("") || DOB.equals("")) {
+                        userData = null;
+                    } else {
+                        userData = new User(0, firstName, lastName, DOB);
+                    }
+                }catch (NullPointerException e){
                 }
-            }catch (NullPointerException e){
-            }
         }
 
         public void getAssignmentData(){
-            try {
                 String classroom = this.className.getText();
                 String description = this.description.getText();
                 String title = this.title.getText();
                 String teacher = this.teacherName.getText();
-                int quantity = Integer.parseInt(this.quantity.getText());
                 String format = this.format.getText();
                 LocalDate deadline = this.deadline.getValue();
 
-                enteredData = new AssignmentsView(teacher, classroom, description, title, quantity, format, deadline);
-            }catch(NumberFormatException e){
-                    errorReporter.appendText("Options have not been filled properly");
+                LocalDate dateNow = LocalDate.now();
+
+
+                try {
+
+                    if (deadline.isBefore(dateNow) || classroom.trim().equals("") || description.trim().equals("") || title.trim().equals("") ||
+                            teacher.trim().equals("") || this.quantity.getText().equals("") || format.trim().equals("") || deadline.equals("")) {
+                        enteredData = null;
+                        AssignmentsStage.errorReporter.setText("Data has not been entered properly");
+                    } else {
+                        int quantity = Integer.parseInt(this.quantity.getText());
+                        //quantity must be greater than 0
+                        if(quantity > 0) {
+                            //for it to update the enteredData static variable
+                            enteredData = new AssignmentsView(teacher, classroom, description, title, quantity, format, deadline);
+                        }
+                    }
+                }catch (Exception e){
                 }
+
+
         }
 
         public void clearTextFields(){
@@ -247,24 +272,10 @@ import java.util.Optional;
             teacherName.clear();
             quantity.clear();
             format.clear();
+            userName.clear();
+            lastName.clear();
+            DOB.getEditor().clear();
             deadline.getEditor().clear();
-        }
-
-
-
-        private void closeConfirmation(Stage stage){
-            stage.setOnCloseRequest((WindowEvent we) ->
-            {
-                Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-                a.setTitle("Confirmation");
-                a.setHeaderText("Do you really want to leave?");
-                Optional<ButtonType> closeResponse = a.showAndWait();
-                if (closeResponse.get() == ButtonType.OK){
-                    System.exit(0);
-                }else{
-                    we.consume();
-                }
-            });
         }
 
 
